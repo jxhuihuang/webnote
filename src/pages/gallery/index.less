@@ -1,0 +1,83 @@
+
+.gallery{
+    .thumbDescription{
+        display: none;
+    }
+    .galleryMain{
+        overflow: hidden;
+        .gallery-content{
+            display: block;
+            .galleryMain_flex{
+                min-height: 10px;
+                float: left;
+                padding: 0 10px;
+                // border:1px solid #EDEDED;
+                .gallery-block{
+                    margin-bottom: 15px;
+                    text-align: center;
+                    a{
+                        display: none;
+                    }
+                    .img_loading{
+                        padding: 30px 0;
+                        color: #666;
+                        font-size: 20px;
+                    }
+                }
+            }
+        }
+    }
+    table{
+        display: none;
+    }
+}
+
+// 图片详情
+#gallery_info{
+    text-align: center;
+    padding: 30px 0  20px 0;
+    
+    .gallery_Title{
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0 20px 30px 20px;
+        h1{
+            text-align: left;
+            font-size: 18px;
+            color: #000;
+            display: inline-block;
+            line-height: 28px;
+            padding-left: 30px;
+        }
+        .gallery_Title_r{
+            span{
+                margin: 0 5px;
+                font-size: 13px;
+                .iconfont{
+                    vertical-align: middle;
+                    margin-right: 3px;
+                    &.icon-liebiao{
+                        font-size: 13px;
+                        margin-right: 5px;
+                        vertical-align: text-bottom;
+                    }
+                }
+            }
+        }
+        
+    }
+    .gallery_img{
+        padding: 20px 15px;
+        font-size: 0;
+        .galleryTitle{
+            display: none;
+        }
+        a{
+            display: none;
+        }
+
+    }
+}
+// galleryTitle
+

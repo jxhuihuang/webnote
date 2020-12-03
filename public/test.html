@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+	<head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>test</title>
+		<link href="http://at.alicdn.com/t/font_432120_bmasnembnd7.css?v=2.3" rel="stylesheet"> 
+		<script>
+            
+			var defaultData={
+				blogId:"220820",  //博客id; 
+                navList:"电脑技术,娱乐笑话,实用,娱乐杂谈",  //要显示的导航（用英文逗号隔开）
+                postId: "5455757", //文章id
+                archivePrivate: false, //文章是否私有（只有自己能看）
+                isRefactoring:false,  //是否还原
+                isInMaintain:false,  //是否维护中
+                isGray:false,  //页面变灰色
+                //活动
+                activity:[
+                    {
+                     isShow:true,
+                     link:"",
+                     icon:"https://i.guancha.cn/post/20200811180405645.jpg ", //https://images.cnblogs.com/cnblogs_com/bigweb/682944/o_15880642-8cc90f20c950bb4eb0af8236e3b04ac8.jpg
+                    },
+                    {
+                        isShow:true,
+                        link:"http://www.baidu.com",
+                        icon:"https://i.guancha.cn/tg/20200729133410767.jpg",
+                    }
+                ],
+               BlogApp:"bigweb",
+               currentBlogId:"206332",
+			}
+            var currentBlogApp="";
+            var isLogined=false;
+            var currentBlogId="206332";
+            var isBlogOwner=true;
+            var ctx="https://www.cnblogs.com/bigweb";
+            
+        </script> 
+        <style>
+            #sideBarMain{
+                display: none;
+            }
+        </style>
+	</head>
+	<body> 
+        <div id="page_begin_html">
+            <div id="app"></div>
+        </div>
+        <div id="home">
+            <div id="main">
+                <div id="mainContent">
+                    <div class="forFlow">
+
+                    </div>
+                </div>
+                <div id="sideBar">
+                    <div id="sideBarMain">
+                        <div id="sidebar_news"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+	</body>
+</html>
