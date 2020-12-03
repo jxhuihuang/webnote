@@ -9,7 +9,7 @@
     "antd": "^4.6.3",
     "babel-core": "^6.26.3",
     "css-loader": "^3.5.3",
-    "jquery": "^3.3.1",
+    "jquery": "^3.5.0",
     "less-loader": "^2.2.3",
     "moment": "^2.28.0",
     "postcss-loader": "^3.0.0",
