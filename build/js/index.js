@@ -1380,37 +1380,21 @@ webpackJsonp([0],{
 	var BootCommons = Object.assign({}, variables, default_data);
 
 	/*判断是否是""或undefind null*/
-	function checkNull(obj) {
-	    var isNull = false;
-	    if (obj === null || typeof obj === "undefined") {
-	        isNull = true;
-	    } else {
-	        var type = (typeof obj === 'undefined' ? 'undefined' : _typeof(obj)).toLowerCase();
-	        if (type === "string" && obj.toString().replace(/(^\s*)|(\s*$)/g, "") === "") {
-	            isNull = true;
-	        }
-	        if (type == "object") {
-	            isNull = false;
-	        }
+	function checkNull(val) {
+	    var typename = Object.prototype.toString.call(val).slice(8, -1).toLowerCase();
+	    if (typename === "null" || typename === "undefined") {
+	        return true;
 	    }
-	    return isNull;
+	    return false;
 	}
 
 	//去除 undefind、 null 全部设为 "" 
-	function removeNull(obj) {
-	    if (obj === null || typeof obj === "undefined") {
-	        obj = "";
-	    } else {
-	        var type = (typeof obj === 'undefined' ? 'undefined' : _typeof(obj)).toLowerCase();
-	        if (type === "string") {
-	            if (obj.toString().replace(/(^\s*)|(\s*$)/g, "") === "") {
-	                obj = "";
-	            } else {
-	                obj = obj.replace(/(^\s*)|(\s*$)/g, "");
-	            }
-	        }
+	function removeNull(val) {
+	    var typeName = Object.prototype.toString.call(val).slice(8, -1).toLowerCase();
+	    if (typeName == "null" || typeName == "undefined") {
+	        return "";
 	    }
-	    return obj;
+	    return val;
 	}
 
 	function linkTo(url) {

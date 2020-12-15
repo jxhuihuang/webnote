@@ -11,7 +11,6 @@ var webpack = require('webpack');
 var config = {
     entry: {
         index: './index.js',
-        test: './test.js'
     },
     output: {
         path: './build/',
