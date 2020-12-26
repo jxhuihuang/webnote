@@ -257,14 +257,14 @@ export default class Header extends Component {
                                 if(isadmin){
                                     return (
                                         <Menu.Item className="overlayList">
-                                            <a href={obj.link} ><Icons type={obj.icon} size="18px" color="#00ACF0" />{obj.title}</a>
+                                            <a href={obj.link} target="_blank" ><Icons type={obj.icon} size="18px" color="#00ACF0" />{obj.title}</a>
                                         </Menu.Item>
                                     )
                                 }
                             }else{
                                 return (
                                     <Menu.Item className="overlayList">
-                                       <a href={obj.link} ><Icons type={obj.icon} size="18px" color="#00ACF0" />{obj.title}</a>
+                                       <a href={obj.link} target="_blank"><Icons type={obj.icon} size="18px" color="#00ACF0" />{obj.title}</a>
                                    </Menu.Item>
                                 )
                             }
@@ -293,11 +293,12 @@ export default class Header extends Component {
                         <ul id="navLists">
                             <li className="nav" ></li>
                             {
-                                
                                 navCategory.map((objs, i) => {
                                     let navClasss=objs.current?"nav_current":"nav_"+(i+1)
                                     return (
-                                        <li className="nav" id={navClasss} key={i} data-name={objs.name}><a className="menu" href={objs.link}>{objs.name}</a></li>
+                                        <li className="nav" id={navClasss} key={i} data-name={objs.name}>
+                                            <a className="menu" href={objs.link}>{objs.name}</a>
+                                        </li>
                                     )
                                 })
                             }

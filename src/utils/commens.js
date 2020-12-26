@@ -138,53 +138,30 @@ function hidesideMobile(event) {
 
 function getcbpdes(str) {
     let $this = str;
-    let cbpdesData = {};
+    let cbpdesData = {cbpdes:"", imgScr:"", type:"cbpdes", isAdminOnlyReader:"false"};
 
     if ($this.find(".c_b_p_desc").length > 0) {
+        if($this.find(".c_b_p_desc  img").length>0){
+            cbpdesData.imgScr=httpsType + removehttp($this.find(".c_b_p_desc  img:first").attr("src"));
+        }
         let cbpdesHtml = $this.find(".c_b_p_desc").html() || "";
-        cbpdesHtml = $this.find(".c_b_p_desc").html().replace(/(^\s*)|(\s*$)/g, "") ;
-        cbpdesHtml = cbpdesHtml.indexOf("摘要：") != "-1" ? cbpdesHtml.replace("摘要：", "") : cbpdesHtml;
-        cbpdesHtml = cbpdesHtml.replace(/\<a.*?\>.*?\<\/a\>/g, "")
-        if(isContain(cbpdesHtml,"原文链接")){
-            cbpdesHtml=cbpdesHtml.split("原文链接")[0]
+        let cbpdes = cbpdesHtml.replace("摘要：", "").replace(/\<a.*?\>.*?\<\/a\>/g, "").replace(/\<img.*?\>/g, "").replace(/(^\s*)|(\s*$)/g, "") ;
+        cbpdes=cbpdes.includes("原文链接")?cbpdes.split("原文链接")[0].replace(/(^\s*)|(\s*$)/g, ""):cbpdes;
+        if(cbpdes==="只有博主才能阅读该文。" || cbpdes==="只有博主才能阅读该文。"){
+            console.log('cbpdes:',cbpdes);
+            
+            cbpdesData.isAdminOnlyReader="true";
         }
-        if (cbpdesHtml.length > 0) {
-            var cbpdescImg_lh = $this.find(".c_b_p_desc  img").length;
-            const imgScr = cbpdescImg_lh > 0 ? httpsType + removehttp($this.find(".c_b_p_desc  img:first").attr("src")) : "";
-            let cbpdes = cbpdescImg_lh > 0 ? cbpdesHtml.replace(/\<img.*?\>/g, "") : cbpdesHtml; //文章摘要
-            cbpdes = cbpdes.replace(/\s/g, '');
-            cbpdes = isMobile ? cutstr(cbpdes, 100) : cbpdes; //文章摘要
-            cbpdesData = {
-                cbpdes,
-                imgScr,
-                type:"cbpdes"
-            }
-        } else {
-            cbpdesData = {
-                cbpdes: "",
-                imgScr: "",
-                type:"cbpdes"
-            }
-        }
-    }else if($this.find(".detail-content").length > 0){ //显示全文
-        let postContent=$this.find(".detail-content").html() || "";
-        cbpdesData = {
-            cbpdes: postContent,
-            imgScr: "",
-            type:"postbody"
-        }
-    }else{
-        cbpdesData = {
-            cbpdes: "",
-            imgScr: "",
-            type:"cbpdes"
-        }
+        cbpdesData.cbpdes=isMobile ? cutstr(cbpdes, 100) : cbpdes; //文章摘要
+    }else if($this.find(".detail-content").length > 0 || $this.find(".cnblogs-post-body").length > 0){  //显示全文
+        let postContent=$this.find(".detail-content").html() ||  $this.find(".cnblogs-post-body").html() || "";
+        cbpdesData.cbpdes=postContent;
+        cbpdesData.type="postbody"
     }
-    
     return cbpdesData;
 }
 
-function getPostLisst(whichpage){
+function getPostLisst(whichpage, blogInfo){
     const { webpages, subPages } = whichpage;
     let PostLisstObject = [];
     switch (subPages) {
@@ -206,7 +183,12 @@ function getPostLisst(whichpage){
                     let footInfo=getlistfootInfo($this.find(".postDesc"), whichpage);
                     objs.footInfo=footInfo || {};
                     // objs=Object.assign({},objs,footInfo)
-                    PostLisstObject.push(objs)
+
+                    if(blogInfo.isadmin){
+                        PostLisstObject.push(objs)
+                    }else{
+                        cbpdesObj.isAdminOnlyReader!=="true"?PostLisstObject.push(objs):"" 
+                    }
                 }else if(lengths>1){
                     for(var i=0;i<$this.find(".postTitle").length; i++){
                         let $_this=$this.find(".postTitle").eq(i)
@@ -223,7 +205,13 @@ function getPostLisst(whichpage){
                         let footInfo=getlistfootInfo(footInfobox, whichpage);
                         objs1.footInfo=footInfo || {};
                         // objs1=Object.assign({},objs1,footInfo)
-                        PostLisstObject.push(objs1)
+
+                        if(blogInfo.isadmin){
+                            PostLisstObject.push(objs1)
+                        }else{
+                            cbpdesObj.isAdminOnlyReader!=="true"?PostLisstObject.push(objs1):""
+                        }
+                        
                     }
                 }
             })
@@ -246,7 +234,12 @@ function getPostLisst(whichpage){
                     // 获取文章其他信息
                     let footInfo=getlistfootInfo($this.find(".entrylistItemPostDesc"), whichpage);
                     objs.footInfo=footInfo || {};
-                    PostLisstObject.push(objs)
+
+                    if(blogInfo.isadmin){
+                        PostLisstObject.push(objs)
+                    }else{
+                        cbpdesObj.isAdminOnlyReader!=="true"?PostLisstObject.push(objs):"" 
+                    }
                 }
             }
         break;
@@ -581,21 +574,39 @@ function removeFollow(blogInfo, callBack){
 
 // 获取显示所有tag列表
 function getTagList(){
-    let tagList=[];
-    $("#taglist .tagMain").html("");
-    $.each($("#MyTag1_dtTagList td"), function (i, n) {
-        if(!checkNull($(this).find("a").html())){
-            const title=$(this).find("a").html();
-            const link=$(this).find("a").attr("href");
-            const num=getLastbrackval(HtmlEncode($(this).find("span").html()));
-            const bgColor=random(1,colorChars).toString();
-            $("#taglist .tagMain").append(`
-                <span class="tagBox ant-tag" style="background-color:${bgColor}; border:transparent;"><a href="${link}" style="color:#FFF">${title} <em>(${num})</em></a></span>
-            `)
-            tagList.push({title,link,num,})
+    let tagLists=[]
+    let tr_length=$("#taglist").find("tr").length || 0;
+    let td_length=$("#taglist").find("tr:first-child td").length || 0;
+    for(let i=0; i<td_length; i++){
+        for(let j=0; j<tr_length; j++){
+            let $this=$("#taglist").find("tr:eq("+j+")").find("td:eq("+i+")")
+            if($this.html()){
+                const title=$this.find("a").html();
+                const link=$this.find("a").attr("href");
+                const num=getLastbrackval(HtmlEncode($this.find("span").html()));
+                const bgColor=random(1,colorChars).toString();
+                tagLists.push({title, link, num, bgColor})
+            } 
         }
-    })
+    }
+    return tagLists
 }
+// function getTagList1(){
+//     let tagList=[];
+//     $("#taglist .tagMain").html("");
+//     $.each($("#MyTag1_dtTagList td"), function (i, n) {
+//         if(!checkNull($(this).find("a").html())){
+//             const title=$(this).find("a").html();
+//             const link=$(this).find("a").attr("href");
+//             const num=getLastbrackval(HtmlEncode($(this).find("span").html()));
+//             const bgColor=random(1,colorChars).toString();
+//             $("#taglist .tagMain").append(`
+//                 <span class="tagBox ant-tag" style="background-color:${bgColor}; border:transparent;"><a href="${link}" style="color:#FFF">${title} <em>(${num})</em></a></span>
+//             `)
+//             tagList.push({title,link,num,})
+//         }
+//     })
+// }
 //上一篇下一篇
 function getnextprev() {
     var nextprevList = '';

@@ -19,7 +19,7 @@ export default class Home extends Component {
     componentWillMount(){
         let {blogInfo}=this.props; //获取用户信息
         let {whichpage}=blogInfo;
-        let postList=getPostLisst(whichpage);
+        let postList=getPostLisst(whichpage, blogInfo);
         
         
         this.setState({
@@ -83,10 +83,22 @@ export default class Home extends Component {
                 $("#home").show();
                 sideBar(blogInfo) //加载侧边栏
                 $("#MyTag1_dtTagList").before('<div class="white boxsizing tagMain"></div>');
-                getTagList();// 获取显示所有tag列表
+                let tagLists=getTagList() || [];// 获取显示所有tag列表
+                tagLists.map((obj)=>{
+                    $("#taglist .tagMain").append(`
+                        <span class="tagBox ant-tag" style="background-color:${obj.bgColor}; border:transparent;"><a href="${obj.link}" style="color:#FFF">${obj.title} <em>(${obj.num})</em></a></span>
+                    `)
+                })
                 $('.forFlow').delegate('#tags_orderby_usecount, #tags_orderby_name', 'click', function() { 
+                    
                     setTimeout(() => {
-                        getTagList();// 获取显示所有tag列表
+                        let tagLists=getTagList() || [];// 获取显示所有tag列表
+                        $("#taglist .tagMain").html("");
+                        tagLists.map((obj)=>{
+                            $("#taglist .tagMain").append(`
+                                <span class="tagBox ant-tag" style="background-color:${obj.bgColor}; border:transparent;"><a href="${obj.link}" style="color:#FFF">${obj.title} <em>(${obj.num})</em></a></span>
+                            `)
+                        })
                     }, 200);
 
                 })

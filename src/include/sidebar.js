@@ -87,7 +87,10 @@ let sideBar=function(blogInfo){
                             let num=getLastbrackval(values); //获取最后括号的数字;
                             let link=$_this.find("a").attr("href");
                             name=name.replace(/(^\s*)|(\s*$)/g, "");
-                            postcategoryArry.push({name, link, num})
+                            if(name!=="更多"){
+                                postcategoryArry.push({name, link, num})
+                            }
+                            
                         }
                         categoryArry.push({title:"随笔分类",list:postcategoryArry})
                     }
@@ -103,7 +106,9 @@ let sideBar=function(blogInfo){
                             let num=getLastbrackval(values); //获取最后括号的数字;
                             let link=$_this.find("a").attr("href");
                             name=name.replace(/(^\s*)|(\s*$)/g, "");
-                            articlecategorys.push({name, link, num})
+                            if(name!=="更多"){
+                                articlecategorys.push({name, link, num})
+                            }
                         }
                         if(!archivePrivate){
                             categoryArry.push({title:"文章分类",list:articlecategorys})
@@ -210,7 +215,9 @@ let sideBar=function(blogInfo){
                             let num=getLastbrackval($_this.html().replace(/<[^>]+>/g, "")); //获取最后括号的数字; 
                             let link=$_this.find("a").attr("href");
                             name=name.replace(/(^\s*)|(\s*$)/g, "");
-                            postarchiveArry.push({name, link, num});
+                            if(name!=="更多"){
+                                postarchiveArry.push({name, link, num});
+                            }
                         }
                         archiveArry.push({title:"随笔档案",list:postarchiveArry})
                     }
@@ -225,7 +232,9 @@ let sideBar=function(blogInfo){
                             let num=getLastbrackval($_this.html().replace(/<[^>]+>/g, "")); //获取最后括号的数字; 
                             let link=$_this.find("a").attr("href");
                             name=name.replace(/(^\s*)|(\s*$)/g, "");
-                            articlearchiveArry.push({name, link, num});
+                            if(name!=="更多"){
+                                articlearchiveArry.push({name, link, num});
+                            }
                         }
                         if(!archivePrivate){
                             archiveArry.push({title:"文章档案",list:articlearchiveArry})
@@ -456,12 +465,16 @@ let sideBar=function(blogInfo){
                                 </div>
                             }
                             <div>
-                                <p class="statistic_num followers_num">{followers_num}</p>
-                                <p class="statistic_name">粉丝</p>
+                                <a href={"https://home.cnblogs.com/u/"+blogInfo.blogApp+"/relation/followers"} target="_blink">
+                                    <p class="statistic_num followers_num">{followers_num}</p>
+                                    <p class="statistic_name">粉丝</p>
+                                </a>
                             </div>
                             <div>
-                                <p class="statistic_num">{blogInfo.followees}</p>
-                                <p class="statistic_name">关注</p>
+                                <a href={"https://home.cnblogs.com/u/"+blogInfo.blogApp+"/relation/following"} target="_blink">
+                                    <p class="statistic_num">{blogInfo.followees}</p>
+                                    <p class="statistic_name">关注</p>
+                                </a>
                             </div>
                         </div>
                         <div class="btn-user">
