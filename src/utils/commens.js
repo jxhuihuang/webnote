@@ -684,50 +684,49 @@ function getPhotoList(){
 function getPages(){
     const currentPage=geturl("page")|| "1";
     let $page_main="";
-    if($(".forFlow").find(".Pager").length){
-        $page_main=$(".forFlow").find(".Pager")
-    }else if($(".forFlow").find(".topicListFooter").length>0){
-        if($(".forFlow").find(".topicListFooter .pager").length>0){
-            $page_main=$(".forFlow").find(".topicListFooter .pager")
-        }else{
-            $page_main=$(".forFlow").find(".topicListFooter")
-        }
+    if($(".forFlow").find(".topicListFooter").length>0){
+        $page_main=$(".forFlow").find(".topicListFooter .pager").length>0?$(".forFlow").find(".topicListFooter .pager"):$(".forFlow").find(".topicListFooter")
+    }else if($(".forFlow").find(".pager").length>0){
+        $page_main=$(".forFlow").find(".pager")
     }
     $page_main=$page_main || "";
-    
-    if($page_main!==""){
-       if($page_main.find("#nav_next_page").length>0){
-            
-            if(isMobile){
-                let nextpages=$(".topicListFooter").html() || "";
-                // let current_pages=`<span class="current_page">${currentPage}</span>`
-                let prepage='<a href="javascript:void(0)" class="disable">上一页</a>';
-                const mob_pageLists=nextpages;
-                return mob_pageLists;
-            }else{
-                const pageList=$(".topicListFooter").html() || "";
-                return pageList;
-            }
-       }else{
-            if(isMobile){
-                let prePage_href=$page_main.find("a:contains('上一页')").attr("href") || "";
-                let nextPage_href=$page_main.find("a:contains('下一页')").attr("href") || "";
-                let prePage=prePage_href!==""?`<a href="${prePage_href}">上一页</a>`:'' ; //'<a href="javascript:void(0)" class="disable">上一页</a>';
-                let current_pages=`<span class="current_page">${currentPage}</span>`
-                let nextpage=nextPage_href!==""?`<a href="${nextPage_href}">下一页</a>`:'' ; //'<a href="javascript:void(0)" class="disable">下一页</a>';
-                const mobile_pageList=prePage+nextpage;
-                return mobile_pageList;
-                
-            }else{
-                let pageLists=$page_main.html() || "";
-                pageLists=pageLists.replace("···",`<span class="omit">···</span>`)
-                pageLists=currentPage!==""?pageLists.replace(currentPage,`<span class="current_page">${currentPage}</span>`):pageLists;
-                return pageLists;
-            }
-        }
-    }else{
+    if($page_main===""){
         return "";
     }
+    if($page_main.find("#nav_next_page").length>0){
+            
+        if(isMobile){
+            let nextpages=$(".topicListFooter").html() || "";
+            // let current_pages=`<span class="current_page">${currentPage}</span>`
+            let prepage='<a href="javascript:void(0)" class="disable">上一页</a>';
+            const mob_pageLists=nextpages;
+            return mob_pageLists;
+        }else{
+            const pageList=$(".topicListFooter").html() || "";
+            return pageList;
+        }
+   }else{
+        if(isMobile){
+            let prePage_href=$page_main.find("a:contains('上一页')").attr("href") || "";
+            let nextPage_href=$page_main.find("a:contains('下一页')").attr("href") || "";
+            let prePage=prePage_href!==""?`<a href="${prePage_href}">上一页</a>`:'' ; //'<a href="javascript:void(0)" class="disable">上一页</a>';
+            let current_pages=`<span class="current_page">${currentPage}</span>`
+            let nextpage=nextPage_href!==""?`<a href="${nextPage_href}">下一页</a>`:'' ; //'<a href="javascript:void(0)" class="disable">下一页</a>';
+            const mobile_pageList=prePage+nextpage;
+            return mobile_pageList;
+            
+        }else{
+            let pageLists=$page_main.html() || "";
+            pageLists=pageLists.replace("···",`<span class="omit">···</span>`)
+            let strP1 =eval("/("+currentPage+")(\\s*<a)/g");
+            pageLists=currentPage!==""?pageLists.replace(strP1,`<span class="current_page">${currentPage}</span>$2`):pageLists;
+            var strP =eval("/(<\\/a>\\s*)("+currentPage+")/g");
+            pageLists=currentPage!==""?pageLists.replace(strP,`$1<span class="current_page">${currentPage}</span>`):pageLists;
+
+            return pageLists;
+        }
+    }
+    
 }
 export {
     getBlogInfo,
