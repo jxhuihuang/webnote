@@ -172,7 +172,7 @@ function getPostLisst(whichpage, blogInfo){
                 let lengths=$this.find(".postTitle").length;
                 if(lengths===1){
                     let objs={}
-                    objs.title=$this.find(".postTitle span").html().replace(/(^\s*)|(\s*$)/g, "");
+                    objs.title=$this.find(".postTitle").html().replace(/(^\s*)|(\s*$)/g, "");
                     objs.link=$this.find(".postTitle a").attr("href").replace(/(^\s*)|(\s*$)/g, "");
                     // 获取摘要
                     let cbpdesObj=getcbpdes($this)
@@ -193,7 +193,7 @@ function getPostLisst(whichpage, blogInfo){
                     for(var i=0;i<$this.find(".postTitle").length; i++){
                         let $_this=$this.find(".postTitle").eq(i)
                         let objs1={}
-                        objs1.title=$_this.find("span").html().replace(/(^\s*)|(\s*$)/g, "");
+                        objs1.title=$_this.html().replace(/(^\s*)|(\s*$)/g, "");
                         objs1.link=$_this.find("a").attr("href").replace(/(^\s*)|(\s*$)/g, "");
                         // 获取摘要
                         let cbpdesObj=getcbpdes($_this.next());
@@ -224,7 +224,7 @@ function getPostLisst(whichpage, blogInfo){
                 for(let i=0; i<$(".forFlow").find(".entrylistItem").length;i++){
                     let  $this=$(".forFlow").find(".entrylistItem:eq("+i+")");
                     let objs={};
-                    objs.title=$this.find(".entrylistItemTitle span").html().replace(/(^\s*)|(\s*$)/g, "");
+                    objs.title=$this.find(".entrylistItemTitle").html().replace(/(^\s*)|(\s*$)/g, "");
                     objs.link=$this.find(".entrylistPosttitle a").attr("href").replace(/(^\s*)|(\s*$)/g, "");
                      // 获取摘要
                     let cbpdesObj=getcbpdes($this)
@@ -250,7 +250,7 @@ function getPostLisst(whichpage, blogInfo){
                 for(let i=0; i<$(".forFlow").find(".PostList").length;i++){
                     let  $this=$(".forFlow").find(".PostList:eq("+i+")");
                     let objs={};
-                    objs.title=$this.find(".postTitl2 span").html().replace(/(^\s*)|(\s*$)/g, "");
+                    objs.title=$this.find(".postTitl2").html().replace(/(^\s*)|(\s*$)/g, "");
                     objs.link=$this.find(".postTitl2 a").attr("href").replace(/(^\s*)|(\s*$)/g, "");
                     // 获取文章其他信息
                     let footInfo=getlistfootInfo($this.find(".postDesc2"), whichpage);
