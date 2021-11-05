@@ -1,5 +1,5 @@
 {
-  "name": "nginx-1.8.1",
+  "name": "antd-demo",
   "version": "1.0.0",
   "description": "",
   "directories": {
@@ -40,11 +40,11 @@
     "webpack": "^1.13.2",
     "webpack-dev-server": "^1.14.1"
   },
-  "proxy":{
-    "/api/**":{
-       "target":"https://easymock.spiritling.pub/",
-       "changeOrigin": true
-     }
+  "proxy": {
+    "/api/**": {
+      "target": "https://easymock.spiritling.pub/",
+      "changeOrigin": true
+    }
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
