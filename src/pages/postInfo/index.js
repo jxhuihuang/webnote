@@ -23,7 +23,7 @@ export default class PostInfo extends Component {
         $("#home").show();
         sideBar(blogInfo) //加载侧边栏
         let postTitle=$(".postTitle2").html();
-        $(".postTitle").html(postTitle);
+        $(".post h1.postTitle").html(postTitle);
         //获取文章其他信息
         let articleObject={}
         var postDate=$("#post-date").html()
@@ -34,7 +34,7 @@ export default class PostInfo extends Component {
         articleObject.AddToWz=addToWzs || ""
         articleObject.readCount=$("#post_view_count").html();
         articleObject.commentCount=$("#post_comment_count").html();
-        $(".postTitle").after(`
+        $(".post h1.postTitle").after(`
             <div class="post-bots">
                 <span class="date">
                     ${articleObject.date} 
