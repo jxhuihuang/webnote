@@ -276,11 +276,13 @@ const ajaxFa=function(returnData ={},callback,ajaxUrl,{
                     callback.call($this, data);
                 },
                 error: function (error) {
-                    console.log('error status:', error.status);
-                    if(error.status > 0){
-                        showErrorMsg && message.info('抱歉！发生了错误！麻烦反馈至contact@cnblogs.com')
-                        errors.call(error);
-                    }
+                    // console.log('error status:', error.status);
+                    showErrorMsg && message.info('抱歉！发生了错误！麻烦反馈至contact@cnblogs.com')
+                    errors.call(error);
+                    // if(error.status > 0){
+                    //     showErrorMsg && message.info('抱歉！发生了错误！麻烦反馈至contact@cnblogs.com')
+                    //     errors.call(error);
+                    // }
                 }
             });
         break;

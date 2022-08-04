@@ -65,12 +65,14 @@ class Main extends Component {
         }else{
             getBlogInfo().then((res) => {
                 if(res.state===1){
+                    console.log("res.state===1")
                     res.whichpage=whichpage;
                     this.setState({
                         blogInfo: res,
                         whichpage,
                     })
                 }else if(res.state===0){
+                    console.log("res.state===0")
                     this.setState({
                         blogInfo: {whichpage:whichpage},
                         whichpage,
@@ -79,6 +81,11 @@ class Main extends Component {
                 }
             }).catch((error)=>{
                 console.log('getBlogInfo Error',error);
+                this.setState({
+                    blogInfo: {whichpage:whichpage},
+                    whichpage,
+                    getBlogInfoError:true,
+                })
             })
         }
     }
