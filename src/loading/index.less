@@ -1,0 +1,65 @@
+/*加载动画 */
+.loading{
+    position: absolute;
+    text-align: center;
+    width:100%;
+    height:100%;
+    vertical-align:middle;  
+    overflow: hidden;
+    z-index: 100;
+    .loadMain{
+        width: 100px;
+        height: 100px;
+        position: absolute;
+        top: 0px;
+        bottom: 0px;
+        left: 0px;
+        right: 0px;
+        margin: auto;
+        .spinner {
+            margin: 0px auto 0;
+            width: 100px;
+            text-align: center;
+            > div {
+                width: 20px;
+                height: 20px;
+                background-color: #67CF22;
+                border-radius: 100%;
+                display: inline-block;
+                -webkit-animation: bouncedelay 1.4s infinite ease-in-out;
+                animation: bouncedelay 1.4s infinite ease-in-out;
+                /* Prevent first frame from flickering when animation starts */
+                -webkit-animation-fill-mode: both;
+                animation-fill-mode: both;
+                overflow: hidden;
+                
+            }
+            .bounce1 {
+                    -webkit-animation-delay: -0.32s;
+                    animation-delay: -0.32s;
+                }
+            .bounce2 {
+                -webkit-animation-delay: -0.16s;
+                animation-delay: -0.16s;
+            }
+        }
+        .loadingText{
+            margin-top: 20px;
+            font-size: 13px;
+        }
+    }
+}
+@-webkit-keyframes bouncedelay {
+  0%, 80%, 100% { -webkit-transform: scale(0.0) }
+  40% { -webkit-transform: scale(1.0) }
+}
+ 
+@keyframes bouncedelay {
+  0%, 80%, 100% {
+    transform: scale(0.0);
+    -webkit-transform: scale(0.0);
+  } 40% {
+    transform: scale(1.0);
+    -webkit-transform: scale(1.0);
+  }
+}
