@@ -1,93 +1,159 @@
-*{
-    padding: 0;
-    margin: 0;
-    outline: none;
+* {
+	padding: 0;
+	margin: 0;
+	outline: none;
 }
-html,body{
-    width: 100%;
-    height: 100%;
+
+html,
+body {
+	width: 100%;
+	height: 100%;
 }
-body, div, h1, h2, h3, h4, h5, h6, table, tr,th,td, ol, ul, li, dl, dt, dd, form, p{ padding: 0px; margin: 0px; outline: none; }
-table{ border-collapse: collapse; empty-cells: show; }
-ul,li{ list-style: none; }
-em{font-style: normal;}
-img{  
-    width: auto;
-    max-width: 100%;
-    border: 0;
+
+body,
+div,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+table,
+tr,
+th,
+td,
+ol,
+ul,
+li,
+dl,
+dt,
+dd,
+form,
+p {
+	padding: 0px;
+	margin: 0px;
+	outline: none;
+}
+
+table {
+	border-collapse: collapse;
+	empty-cells: show;
+}
+
+ul,
+li {
+	list-style: none;
+}
+
+em {
+	font-style: normal;
+}
+
+img {
+	width: auto;
+	max-width: 100%;
+	border: 0;
 }
 
 
 
-.bold {font-weight: bold}
-
-a { text-decoration: none; color:inherit;} 
-a:active, a:visited, a:link{
-    text-decoration: none!important;
-}
-a:hover{
-    text-decoration: none;
+.bold {
+	font-weight: bold
 }
 
-.boxsizing{
-    box-sizing:border-box;
-    -moz-box-sizing:border-box; /* Firefox */
-    -webkit-box-sizing:border-box; /* Safari */
+a {
+	text-decoration: none;
+	color: inherit;
 }
-input[type=submit]::-moz-focus-inner,input[type=button]::-moz-focus-inner,button::-moz-focus-inner{ border: 0; padding: 0; }
+
+a:active,
+a:visited,
+a:link {
+	text-decoration: none !important;
+}
+
+a:hover {
+	text-decoration: none;
+}
+
+.boxsizing {
+	box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	/* Firefox */
+	-webkit-box-sizing: border-box;
+	/* Safari */
+}
+
+input[type=submit]::-moz-focus-inner,
+input[type=button]::-moz-focus-inner,
+button::-moz-focus-inner {
+	border: 0;
+	padding: 0;
+}
+
 /*去除按钮的默认样式*/
 
-input[type=text],input[type=search],input[type=password]{
+/* input[type=text],input[type=search],input[type=password]{
     border:1px solid #EDEDEd;
     -webkit-appearance:none;
     outline:none
-}
-textarea:focus,textarea:hover,select:focus{
-    outline:none;
-}
-
-input:hover, input:focus, input::-moz-focus-inner,input::-moz-focus-inner{
-    outline:none;
-    border-color: inherit;
+} */
+textarea:focus,
+textarea:hover,
+select:focus {
+	outline: none;
 }
 
-button,input[type=button]{
-    opacity: .9;
-    filter: alpha(opacity=90);
-    text-decoration: none;
+input:hover,
+input:focus,
+input::-moz-focus-inner,
+input::-moz-focus-inner {
+	outline: none;
+	border-color: inherit;
 }
-button:hover,input[type=button]:hover{
-    opacity: .75;
-    filter: alpha(opacity=75);
-    text-decoration: none;
+
+button,
+input[type=button] {
+	opacity: .9;
+	filter: alpha(opacity=90);
+	text-decoration: none;
+}
+
+button:hover,
+input[type=button]:hover {
+	opacity: .75;
+	filter: alpha(opacity=75);
+	text-decoration: none;
 }
 
 /* 下拉框美化*/
 .select {
-    /*Chrome和Firefox里面的边框是不一样的，所以复写了一下*/
-    border: solid 1px #DDD;
-    /*很关键：将默认的select选择框样式清除*/
-    appearance:none;
-    -moz-appearance:none;
-    -webkit-appearance:none;
-    /*在选择框的最右侧中间显示小箭头图片*/
-    /* background: url("../../../images/select.png") no-repeat scroll right center transparent; */
-    /*为下拉小箭头留出一点位置，避免被文字覆盖*/
-    padding-right: 20px;
-    padding-left: 5px;
-  }
+	/*Chrome和Firefox里面的边框是不一样的，所以复写了一下*/
+	border: solid 1px #DDD;
+	/*很关键：将默认的select选择框样式清除*/
+	appearance: none;
+	-moz-appearance: none;
+	-webkit-appearance: none;
+	/*在选择框的最右侧中间显示小箭头图片*/
+	/* background: url("../../../images/select.png") no-repeat scroll right center transparent; */
+	/*为下拉小箭头留出一点位置，避免被文字覆盖*/
+	padding-right: 20px;
+	padding-left: 5px;
+}
 
 
-  /*清除ie的默认选择框样式清除，隐藏下拉箭头*/
-  .select::-ms-expand { display: none; }
-  
-  .select option{
-    padding: 5px 10px;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    display: block;
-  }
+/*清除ie的默认选择框样式清除，隐藏下拉箭头*/
+.select::-ms-expand {
+	display: none;
+}
+
+.select option {
+	padding: 5px 10px;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	display: block;
+}
 
 
 
@@ -95,257 +161,551 @@ button:hover,input[type=button]:hover{
 
 /*y轴溢出隐藏*/
 .overflow-h {
-    overflow: hidden;
+	overflow: hidden;
 }
 
 
 /*  溢出显示省略 */
-.ellipses{
-    table-layout:fixed;/* 只有定义了表格的布局算法为fixed，下面td的定义才能起作用。 */
-    word-break:keep-all; /* 不换行 */
-    white-space:nowrap; /* 不换行 */
-    overflow:hidden; /* 内容超出宽度时隐藏超出部分的内容 */
-    text-overflow:ellipsis;/* 当对象内文本溢出时显示省略标记(...) ；需与overflow:hidden;一起使用。*/
+.ellipses {
+	table-layout: fixed;
+	/* 只有定义了表格的布局算法为fixed，下面td的定义才能起作用。 */
+	word-break: keep-all;
+	/* 不换行 */
+	white-space: nowrap;
+	/* 不换行 */
+	overflow: hidden;
+	/* 内容超出宽度时隐藏超出部分的内容 */
+	text-overflow: ellipsis;
+	/* 当对象内文本溢出时显示省略标记(...) ；需与overflow:hidden;一起使用。*/
 }
+
 /*  字符超出两行溢出隐藏 */
 .text-overflow-2 {
-    overflow: hidden;
-    text-overflow: ellipsis;
-    display: -webkit-box;
-    -webkit-line-clamp: 2;
-    -webkit-box-orient: vertical;
-  }
-  
-  /*  字符超出三行溢出隐藏 */
-  .text-overflow-3 {
-    overflow: hidden;
-    text-overflow: ellipsis;
-    display: -webkit-box;
-    -webkit-line-clamp: 3;
-    -webkit-box-orient: vertical;
-  }
-/* 换行 */
-.breakAlls{
-    word-break:break-all; /* 换行 */
-    word-wrap:break-word;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	display: -webkit-box;
+	-webkit-line-clamp: 2;
+	-webkit-box-orient: vertical;
 }
-/* 垂直居中 */
-.middle:after{
-    display:inline-block;
-     width:0;
-     height:100%;
-     content:"center";
-     vertical-align:middle;
-     overflow:hidden;
-  }
 
-  /* 清除 */
-  .clear:after{
-      display:block;
-      content:"clear";
-      height:0;
-      clear:both;
-      overflow:hidden;
-      visibility:hidden;
-      line-height: 0; 
-      font-size: 0; 
-  }
-  .clearb:before{
-      display:block;
-      content:"clear";
-      height:0;
-      clear:both;
-      overflow:hidden;
-      visibility:hidden;
-      line-height: 0; 
-      font-size: 0; 
-  }   
+/*  字符超出三行溢出隐藏 */
+.text-overflow-3 {
+	overflow: hidden;
+	text-overflow: ellipsis;
+	display: -webkit-box;
+	-webkit-line-clamp: 3;
+	-webkit-box-orient: vertical;
+}
+
+/* 换行 */
+.breakAlls {
+	word-break: break-all;
+	/* 换行 */
+	word-wrap: break-word;
+}
+
+/* 垂直居中 */
+.middle:after {
+	display: inline-block;
+	width: 0;
+	height: 100%;
+	content: "center";
+	vertical-align: middle;
+	overflow: hidden;
+}
+
+/* 清除 */
+.clear:after {
+	display: block;
+	content: "clear";
+	height: 0;
+	clear: both;
+	overflow: hidden;
+	visibility: hidden;
+	line-height: 0;
+	font-size: 0;
+}
+
+.clearb:before {
+	display: block;
+	content: "clear";
+	height: 0;
+	clear: both;
+	overflow: hidden;
+	visibility: hidden;
+	line-height: 0;
+	font-size: 0;
+}
+
 /* 圆边 */
-.radius{
-    -webkit-border-radius:5px;
-    -moz-border-radius:5px;
-    -ms-border-radius:5px;
-    -o-border-radius:5px;
-    border-radius:5px;
+.radius {
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	-ms-border-radius: 5px;
+	-o-border-radius: 5px;
+	border-radius: 5px;
 }
 
 /*圆形 */
-.circle{
-    -webkit-border-radius:50%;
-    -moz-border-radius:50%;
-    -ms-border-radius:50%;
-    -o-border-radius:50%;
-    border-radius:50%;
-    overflow: hidden;
+.circle {
+	-webkit-border-radius: 50%;
+	-moz-border-radius: 50%;
+	-ms-border-radius: 50%;
+	-o-border-radius: 50%;
+	border-radius: 50%;
+	overflow: hidden;
 }
+
 /*两边圆形 */
-.bscircle{
-    -webkit-border-radius:80000px;
-    -moz-border-radius:80000px;
-    -ms-border-radius:80000px;
-    -o-border-radius:80000px;
-    border-radius:80000px;
-    overflow: hidden;
+.bscircle {
+	-webkit-border-radius: 80000px;
+	-moz-border-radius: 80000px;
+	-ms-border-radius: 80000px;
+	-o-border-radius: 80000px;
+	border-radius: 80000px;
+	overflow: hidden;
 }
+
 /*相对位置*/
-.rel{position:relative;}
-.abs{position: absolute;}
-.fix{position: fixed;}
+.rel {
+	position: relative;
+}
+
+.abs {
+	position: absolute;
+}
+
+.fix {
+	position: fixed;
+}
 
 /*盒子*/
-.hide{display:none;}
-.inl{display:inline;}
-.inb{display:inline-block;}
-.blk{display:block;}
-.distb{display: table}
-.distc{display: table-cell}
+.hide {
+	display: none;
+}
+
+.inl {
+	display: inline;
+}
+
+.inb {
+	display: inline-block;
+}
+
+.blk {
+	display: block;
+}
+
+.distb {
+	display: table
+}
+
+.distc {
+	display: table-cell
+}
 
 /*颜色*/
-.orange{color:#ff5a00;}
-.c_green{color:green;}
-.c_red{color:#ce0404;}
-.c_lightred{color:#BE3E57;}
-.c_999{color:#999;}
-.c_666{color:#666;}
-.c_white{color:#FFF;}
-.c_b9{color:#B9B9B9}
-.c_blue{color:#0068b7}
+.orange {
+	color: #ff5a00;
+}
+
+.c_green {
+	color: green;
+}
+
+.c_red {
+	color: #ce0404;
+}
+
+.c_lightred {
+	color: #BE3E57;
+}
+
+.c_999 {
+	color: #999;
+}
+
+.c_666 {
+	color: #666;
+}
+
+.c_white {
+	color: #FFF;
+}
+
+.c_b9 {
+	color: #B9B9B9
+}
+
+.c_blue {
+	color: #0068b7
+}
 
 /*背景颜色*/
-.highlight{background:#ff6600;}
-.b_red{background:#e62129;}
-.b_orange{background:#f76a24;}
-.b_blue{background:#1472e7;}
-.b_white{background-color:#FFF;}
-.b_green{background-color:#0faaa8;}
-.b_lightred{background:#BE3E57;}
-.b_fa{background: #FAFAFA}
+.highlight {
+	background: #ff6600;
+}
+
+.b_red {
+	background: #e62129;
+}
+
+.b_orange {
+	background: #f76a24;
+}
+
+.b_blue {
+	background: #1472e7;
+}
+
+.b_white {
+	background-color: #FFF;
+}
+
+.b_green {
+	background-color: #0faaa8;
+}
+
+.b_lightred {
+	background: #BE3E57;
+}
+
+.b_fa {
+	background: #FAFAFA
+}
 
 /*文本对齐*/
-.tl{text-align: left;}
-.tc{text-align: center;}
-.tr{text-align: right;}
+.tl {
+	text-align: left;
+}
+
+.tc {
+	text-align: center;
+}
+
+.tr {
+	text-align: right;
+}
 
 /*浮动*/
 .fl {
-    float: left;
+	float: left;
 }
-  
+
 .fr {
-    float: right;
+	float: right;
 }
+
 /*鼠标手*/
-.pointer{
-    cursor: pointer;
+.pointer {
+	cursor: pointer;
 }
 
 
 
 /*  元素绝对定位的垂直水平居中 */
 .absolute-center {
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	transform: translate(-50%, -50%);
 }
 
 /*元素堆叠顺序*/
 .z-50 {
-    z-index: 50;
+	z-index: 50;
 }
+
 .z-100 {
-    z-index: 100;
+	z-index: 100;
 }
+
 .z-150 {
-    z-index: 150;
+	z-index: 150;
 }
+
 .z-200 {
-    z-index: 200;
+	z-index: 200;
 }
+
 .z-250 {
-    z-index: 250;
+	z-index: 250;
 }
+
 .z-max {
-    z-index: 999999;
+	z-index: 999999;
 }
+
 /* 字体大小 */
-.fs10{font-size: 10px}
-.fs11{font-size: 11px}
-.fs12{font-size: 12px}
-.fs13{font-size: 13px}
-.fs14{font-size: 14px}
-.fs15{font-size: 15px}
-.fs16{font-size: 16px}
-.fs17{font-size: 17px}
-.fs18{font-size: 18px}
-.fs19{font-size: 19px}
-.fs20{font-size: 20px}
-.fs25{font-size: 25px}
-.fs30{font-size: 30px}
-.fs35{font-size: 35px}
+.fs10 {
+	font-size: 10px
+}
+
+.fs11 {
+	font-size: 11px
+}
+
+.fs12 {
+	font-size: 12px
+}
+
+.fs13 {
+	font-size: 13px
+}
+
+.fs14 {
+	font-size: 14px
+}
+
+.fs15 {
+	font-size: 15px
+}
+
+.fs16 {
+	font-size: 16px
+}
+
+.fs17 {
+	font-size: 17px
+}
+
+.fs18 {
+	font-size: 18px
+}
+
+.fs19 {
+	font-size: 19px
+}
+
+.fs20 {
+	font-size: 20px
+}
+
+.fs25 {
+	font-size: 25px
+}
+
+.fs30 {
+	font-size: 30px
+}
+
+.fs35 {
+	font-size: 35px
+}
 
 
 /*边距*/
-.mlr5{margin-left:5px;   margin-right:5px}
-.mlr10{margin-left:10px; margin-right:10px}
-.mlr15{margin-left:15px; margin-right:15px}
-.mlr20{margin-left:20px; margin-right:20px}
-.mlr25{margin-left:25px; margin-right:25px}
-.mlr30{margin-left:30px; margin-right:30px}
-.mlr35{margin-left:35px; margin-right:35px}
+.mlr5 {
+	margin-left: 5px;
+	margin-right: 5px
+}
 
-.mt5{margin-top:5px;}
-.mt8{margin-top:8px;}
-.mt10{margin-top:10px;}
-.mt15{margin-top:15px;}
-.mt20{margin-top:20px;}
-.mt25{margin-top:25px;}
-.mt30{margin-top:30px;}
-.mt35{margin-top:35px;}
-.mt40{margin-top:40px;}
-.mt45{margin-top:45px;}
+.mlr10 {
+	margin-left: 10px;
+	margin-right: 10px
+}
+
+.mlr15 {
+	margin-left: 15px;
+	margin-right: 15px
+}
+
+.mlr20 {
+	margin-left: 20px;
+	margin-right: 20px
+}
+
+.mlr25 {
+	margin-left: 25px;
+	margin-right: 25px
+}
+
+.mlr30 {
+	margin-left: 30px;
+	margin-right: 30px
+}
+
+.mlr35 {
+	margin-left: 35px;
+	margin-right: 35px
+}
+
+.mt5 {
+	margin-top: 5px;
+}
+
+.mt8 {
+	margin-top: 8px;
+}
+
+.mt10 {
+	margin-top: 10px;
+}
+
+.mt15 {
+	margin-top: 15px;
+}
+
+.mt20 {
+	margin-top: 20px;
+}
+
+.mt25 {
+	margin-top: 25px;
+}
+
+.mt30 {
+	margin-top: 30px;
+}
+
+.mt35 {
+	margin-top: 35px;
+}
+
+.mt40 {
+	margin-top: 40px;
+}
+
+.mt45 {
+	margin-top: 45px;
+}
 
 
-.mb5{margin-bottom:5px;}
-.mb8{margin-bottom:8px;}
-.mb10{margin-bottom:10px;}
-.mb15{margin-bottom:15px;}
-.mb20{margin-bottom:20px;}
-.mb25{margin-bottom:25px;}
-.mb30{margin-bottom:30px;}
-.mb35{margin-bottom:35px;}
-.mb40{margin-bottom:40px;}
+.mb5 {
+	margin-bottom: 5px;
+}
 
-.ml5{margin-left:5px;}
-.ml8{margin-left:8px;}
-.ml10{margin-left:10px;}
-.ml15{margin-left:15px;}
-.ml20{margin-left:20px;}
-.ml25{margin-left: 25px}
-.ml30{margin-left: 30px}
-.ml35{margin-left: 35px}
-.ml40{margin-left: 40px}
-.ml150{ margin-left:150px;}
+.mb8 {
+	margin-bottom: 8px;
+}
+
+.mb10 {
+	margin-bottom: 10px;
+}
+
+.mb15 {
+	margin-bottom: 15px;
+}
+
+.mb20 {
+	margin-bottom: 20px;
+}
+
+.mb25 {
+	margin-bottom: 25px;
+}
+
+.mb30 {
+	margin-bottom: 30px;
+}
+
+.mb35 {
+	margin-bottom: 35px;
+}
+
+.mb40 {
+	margin-bottom: 40px;
+}
+
+.ml5 {
+	margin-left: 5px;
+}
+
+.ml8 {
+	margin-left: 8px;
+}
+
+.ml10 {
+	margin-left: 10px;
+}
+
+.ml15 {
+	margin-left: 15px;
+}
+
+.ml20 {
+	margin-left: 20px;
+}
+
+.ml25 {
+	margin-left: 25px
+}
+
+.ml30 {
+	margin-left: 30px
+}
+
+.ml35 {
+	margin-left: 35px
+}
+
+.ml40 {
+	margin-left: 40px
+}
+
+.ml150 {
+	margin-left: 150px;
+}
 
 
-.mr5{margin-right:5px;}
-.mr8{margin-right:8px;}
-.mr10{margin-right:10px;}
-.mr15{margin-right:15px;}
-.mr20{margin-right:20px;}
-.mr25{margin-right:25px;}
-.mr30{margin-right:30px;}
-.mr35{margin-right:35px;}
-.mr40{margin-right:40px;}
+.mr5 {
+	margin-right: 5px;
+}
 
-.pl10{padding-left: 10px;}
-.pl15{padding-left: 15px;}
-.pl20{padding-left: 20px;}
-.pl25{padding-left: 25px;}
-.pl30{padding-left: 30px;}
+.mr8 {
+	margin-right: 8px;
+}
 
-.an-table-cell .an-select{
-    width: 100%;
+.mr10 {
+	margin-right: 10px;
+}
+
+.mr15 {
+	margin-right: 15px;
+}
+
+.mr20 {
+	margin-right: 20px;
+}
+
+.mr25 {
+	margin-right: 25px;
+}
+
+.mr30 {
+	margin-right: 30px;
+}
+
+.mr35 {
+	margin-right: 35px;
+}
+
+.mr40 {
+	margin-right: 40px;
+}
+
+.pl10 {
+	padding-left: 10px;
+}
+
+.pl15 {
+	padding-left: 15px;
+}
+
+.pl20 {
+	padding-left: 20px;
+}
+
+.pl25 {
+	padding-left: 25px;
+}
+
+.pl30 {
+	padding-left: 30px;
+}
+
+.an-table-cell .an-select {
+	width: 100%;
 }
 
 
@@ -362,23 +722,25 @@ button:hover,input[type=button]:hover{
 	-ms-flex-flow: row wrap;
 	flex-flow: row wrap
 }
-.an-row-center-all{
-    display: -webkit-box;
+
+.an-row-center-all {
+	display: -webkit-box;
 	display: -ms-flexbox;
 	display: flex;
 	-webkit-box-orient: horizontal;
 	-webkit-box-direction: normal;
 	-ms-flex-flow: row wrap;
 	flex-flow: row wrap;
-    -webkit-box-pack: center;
+	-webkit-box-pack: center;
 	-ms-flex-pack: center;
-    justify-content: center;
-    -webkit-box-align: center;
+	justify-content: center;
+	-webkit-box-align: center;
 	-ms-flex-align: center;
 	align-items: center
 }
 
-.an-row::before,.an-row::after {
+.an-row::before,
+.an-row::after {
 	display: -webkit-box;
 	display: -ms-flexbox;
 	display: flex
@@ -430,6 +792,7 @@ button:hover,input[type=button]:hover{
 	-ms-flex-align: end;
 	align-items: flex-end
 }
+
 .an-row-rtl {
 	direction: rtl
 }
@@ -459,6 +822,7 @@ button:hover,input[type=button]:hover{
 .an-col-pull-24 {
 	right: 100%
 }
+
 .an-col-offset-24 {
 	margin-left: 100%
 }
@@ -4582,6 +4946,7 @@ button:hover,input[type=button]:hover{
 		margin-left: 0
 	}
 }
+
 @media(min-width:992px) {
 	.an-col-lg-24 {
 		display: block;
@@ -6653,6 +7018,7 @@ button:hover,input[type=button]:hover{
 		margin-left: 0
 	}
 }
+
 @media(min-width:1600px) {
 	.an-col-xxl-24 {
 		display: block;
@@ -7688,6 +8054,3 @@ button:hover,input[type=button]:hover{
 		margin-left: 0
 	}
 }
-
-
-

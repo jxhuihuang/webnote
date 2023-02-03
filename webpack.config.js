@@ -11,9 +11,10 @@ var webpack = require('webpack');
 var config = {
     entry: {
         index: './index.js',
+        test: './test.js'
     },
     output: {
-        path: './build/',
+        path: '../build/',
         filename: 'js/[name].js?v=[chunkhash]',  //js/[name].[chunkhash].js
         chunkFilename: '[id].js?v=[chunkhash]'
     },
@@ -85,13 +86,13 @@ var config = {
         }),
 
         /*压缩*/
-        // new webpack.optimize.UglifyJsPlugin({
-        //     compress: {
-        //         warnings: false,
-        //         drop_debugger: true, //输出文件不debugger
-        //         drop_console: true, //输出文件不console
-        //     }
-        // }),
+        new webpack.optimize.UglifyJsPlugin({
+            compress: {
+                warnings: false,
+                drop_debugger: true, //输出文件不debugger
+                drop_console: true, //输出文件不console
+            }
+        }),
 
         // new webpack.ProvidePlugin({// 全局依赖jQuery,不需要import了
         //     $: "jquery",

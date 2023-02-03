@@ -2,7 +2,6 @@
 import React, { Component, Fragment } from 'react'
 import { render } from 'react-dom';
 import { checkNull, removeobj, sorts } from '../../utils/utils'
-// import { SyncOutlined } from '@ant-design/icons';
 import { Loadding } from 'antd'
 import "./index.less";
 let galleryList = function (galleryArry = [], blogInfo) {

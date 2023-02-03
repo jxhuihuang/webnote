@@ -1,0 +1,40 @@
+.full{
+	height: 100%;
+}
+#maintains{
+	background: #FFF;
+	width:100%;
+	min-width: 300px;
+	height: 100%;
+	display: table;
+	table-layout: fixed;
+	.mainPage {
+		display: table-cell;
+		width: 100%;
+		height: 100%;
+		margin: auto;
+		vertical-align: middle;
+		.maintains_img{
+			width: 100%;
+			height: auto;
+			text-align: center;
+			img{
+				width: auto;
+				max-width: 100%;
+				height: auto;
+				@media screen and (max-width:540px){
+					width:100%;
+				}
+			}
+		}
+		.text{
+			text-align: center;
+			font-family: "微软雅黑";
+			font-weight: normal;
+			font-size: 22px;
+			letter-spacing: 5px;
+			color: #999999;
+			padding-top: 10px;
+		}
+	}
+}

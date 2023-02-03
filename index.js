@@ -1,12 +1,12 @@
 import React, { Component, Fragment } from 'react'
 import { render } from 'react-dom';
-import Maintain from './src/isMaintain';
+import Maintain from './src/components/isMaintain';
 import Homes from './src/home.js';
 import { getBlogInfo } from './src/utils/commens.js' //获取博客信息
-import { addEventListener, BootCommons, isMobile } from './src/utils/utils.js'
+import { addEventListener, BootCommons, isMobile, checkNull } from './src/utils/utils.js'
 import Whichpage from './src/utils/whichpage' //判断是什么页面
-import Loadding from './src/loading'
-import Weberror from './src/weberro'
+import Loadding from './src/components/loading'
+import Weberror from './src/components/weberro'
 import './src/css/antd.css';
 import './src/css/base.css';
 import './src/css/index.less';
@@ -45,6 +45,7 @@ class Main extends Component {
             showMaintain = true;
         } else {
             showMaintain = false;
+            $("#page_begin_html").removeClass("full")
         }
 
         // 非博主隐藏日志
@@ -67,6 +68,7 @@ class Main extends Component {
             })
         } else {
             getBlogInfo().then((res) => {
+                console.log("res:", res)
                 if (res.state === 1) {
                     console.log("res.state===1")
                     res.whichpage = whichpage;
@@ -74,7 +76,7 @@ class Main extends Component {
                         blogInfo: res,
                         whichpage,
                     })
-                } else if (res.state === 0) {
+                } else if (!checkNull(res.state) && res.state === 0) {
                     console.log("res.state===0")
                     this.setState({
                         blogInfo: { whichpage: whichpage },
@@ -110,30 +112,28 @@ class Main extends Component {
                     <Loadding />
                 </Fragment>
             )
-        }
-        if (showMaintain) {
+        } else if (showMaintain) {
             return (
                 <Maintain />
             )
-        }
-
-        if (isnotFind) {
+        } else if (isnotFind) {
             this.gotonotFind();
-        }
-
-        if (!getBlogInfoError) {
+        } else if (!getBlogInfoError) {
             return (
                 <Fragment>
                     <Homes blogInfo={blogInfo} />
                 </Fragment>
             )
+        } else {
+            return (
+                <Weberror />
+            )
+            // return (
+            //     <Fragment>
+            //         <Homes blogInfo={blogInfo} />
+            //     </Fragment>
+            // )
         }
-        return (
-            <Weberror />
-        )
-
-
-
     }
 }
 render(<Main />, document.getElementById("app"));

@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { message } from 'antd';
 // import moment from 'moment';
+import { createFromIconfontCN } from '@ant-design/icons';
 const default_data = defaultData || {};
 const httpsType = 'https:' == document.location.protocol ? "https://" : "http://";
 let pageline = 10;
@@ -18,6 +19,13 @@ const colorChars = ['#036564', '#EB6841', '#3FB8AF', '#FE4365', '#FC9D9A', '#EDC
 const sizeChart = ["9px", "10px", "11px", "12px", "13px", "14px", "15px", "16px", "17px", "18px", "19px", "20px", "21px", "22px", "23px", "24px"]
 let variables = { currentUrl, ctx, domainCtx, pageline, isLogin, isadmin, blogId, blogApp, httpsType, colorChars, sizeChart, bolgdefaultAvatars, userdefaultAvatars, loginAvatars };
 const BootCommons = Object.assign({}, variables, default_data)
+
+
+
+export const IconFont = createFromIconfontCN({
+    scriptUrl: '//at.alicdn.com/t/c/font_432120_y306m5avxh9.js?v=1.1',
+    // scriptUrl: './fonts/iconfont.js',
+});
 
 /*判断是否是""或undefind null*/
 function checkNull(val) {
@@ -278,9 +286,10 @@ const ajaxFa = function (returnData = {}, callback, ajaxUrl, {
                     callback.call($this, data);
                 },
                 error: function (error) {
-                    // console.log('error status:', error.status);
+                    console.log('error :', error);
                     showErrorMsg && message.info('抱歉！发生了错误！麻烦反馈至contact@cnblogs.com')
-                    errors.call(error);
+
+                    errors.call(`错误：${error}`);
                     // if(error.status > 0){
                     //     showErrorMsg && message.info('抱歉！发生了错误！麻烦反馈至contact@cnblogs.com')
                     //     errors.call(error);

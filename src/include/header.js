@@ -1,7 +1,7 @@
 /* 博客头部 */
 import React, { Component } from 'react'
-import { BootCommons, isMobile, Icons, removehttp, isContain, linkTo, stringToArry } from '../utils/utils.js'
-import { message, Dropdown, Menu } from 'antd'
+import { BootCommons, isMobile, Icons, removehttp, isContain, linkTo, stringToArry, IconFont } from '../utils/utils.js'
+import { message, Dropdown, Menu, Input } from 'antd'
 import { getPostcategory, showsideMobile, getUserInfo } from '../utils/commens.js' //获取博客信息
 
 import './header.less';
@@ -114,24 +114,20 @@ export default class Header extends Component {
         }
 
     }
-    search_enter = (n) => {
-        if (n.keyCode == 13) {
-            this.tosearch()
-        }
-    }
-    tosearch() {
+
+    tosearch(values) {
         const { blogInfo } = this.state;
         // const {isadmin}=blogInfo;
-        let search_val = document.getElementById("searchInput").value;
-        if (search_val == "") {
-            message.info("请输入你要搜索的内容")
-            return false;
-        }
-        var n = encodeURIComponent("blog:" + blogInfo.blogApp + " " + search_val);
-        window.location.href = "http://zzk.cnblogs.com/s?w=" + n
+        let search_val = values || document.getElementById("searchInput").value || "";
+        // if (search_val == "") {
+        //     message.info("请输入你要搜索的内容")
+        //     window.location.href = 'https://zzk.cnblogs.com/my/s/blogpost-p?Keywords='
+        //     return false;
+        // }
+        var n = search_val != "" ? encodeURIComponent("blog:" + blogInfo.blogApp + " " + search_val) : "";
+        window.location.href = `http://zzk.cnblogs.com/s?w=${n}`
     }
     cancelSearch(e) {
-        var ev = e || event; // enent做兼容
         $(".search-hd").removeClass('on').find('input').blur()
     }
     //电脑端下拉显示用户信息箭头旋转
@@ -175,7 +171,6 @@ export default class Header extends Component {
                 $("#backtop").fadeOut(800);
             }
         }
-
     }
     render() {
         const { blogInfo, navCategory, nav_visiable, user_visiable, userInfo = {} } = this.state;
@@ -286,17 +281,31 @@ export default class Header extends Component {
                         <div id="logo">
                             <a href={ctxIndex}>
                                 <p className={blogSubTitle ? "" : "line-blogTitle"}>{blogTitle}</p>
-                                {blogSubTitle ? <em>{blogSubTitle}</em> : ""}
+                                {/* {blogSubTitle ? <em>{blogSubTitle}</em> : ""} */}
                             </a>
                         </div>
-                        {/* <div id="search">
-                            <div className="searchicobox"><Icons type="icon--search" onClick={(event) => this.searchshow(event)} size="22px" /></div>
-                            <div id="searchContent" className="search-hd boxsizing">
-                                <input id="searchInput" placeholder="请输入您要搜索的内容" onKeyUp={event => this.search_enter(event)} className="input_my_zzk box" type="search" />
-                            </div>
-                        </div> */}
+                        <div className='searchMain'>
+                            {/* <div className="searchicobox"><Icons type="icon--search" onClick={(event) => this.searchshow(event)} size="22px" /></div> */}
+
+                            <Input
+                                id="searchInput"
+                                placeholder="请输入您要搜索的内容"
+
+                                onPressEnter={event => {
+                                    const values = event.target.value;
+                                    this.tosearch(values)
+                                }}
+                                className="searchInput"
+                                suffix={
+                                    <div>
+                                        <IconFont type="icon--search" className="searchIcon" onClick={(event) => this.tosearch()} />
+                                    </div >
+                                }
+                            />
+
+                        </div>
                         {/*导航*/}
-                        <ul id="navLists">
+                        {/* <ul id="navLists">
                             <li className="nav" ></li>
                             {
                                 navCategory.map((objs, i) => {
@@ -308,15 +317,25 @@ export default class Header extends Component {
                                     )
                                 })
                             }
-                        </ul>
+                        </ul> */}
                     </div>
                     <div className="headRight">
-                        <div id="search">
+                        {/* 伸缩的搜索 */}
+                        {/* <div id="search">
                             <div className="searchicobox"><Icons type="icon--search" onClick={(event) => this.searchshow(event)} size="22px" /></div>
                             <div id="searchContent" className="search-hd boxsizing">
-                                <input id="searchInput" placeholder="请输入您要搜索的内容" onKeyUp={event => this.search_enter(event)} className="input_my_zzk box" type="search" />
+                                <Input
+                                    id="searchInput"
+                                    placeholder="请输入您要搜索的内容"
+                                    onPressEnter={event => {
+                                        const values = event.target.value;
+                                        this.tosearch(values)
+                                    }}
+                                    className="input_my_zzk box"
+                                // type="search" 
+                                />
                             </div>
-                        </div>
+                        </div> */}
                         <div className="userinfoshow">
 
                             {isLogin &&
@@ -334,9 +353,11 @@ export default class Header extends Component {
                                 !isLogin && <li id="tologin"><a href={"https://passport.cnblogs.com/login.aspx?ReturnUrl=" + currentUrl} title="登录"><Icons type="icon-denglu" size="26px" /></a></li> //登录
                             }
                             {/* {
+                                notify
                                 !isLogin && <li id="signup"><a href={"https://account.cnblogs.com/signup?ReturnUrl=" + currentUrl}>注册</a></li>
                             } */}
                             <li className="dingy"><a href={ctx + "/rss"} target="_blank" title="订阅"><Icons type="icon-RSS rss_icon" size="32px" /></a></li>
+                            {isLogin && <li className="notify"><a href={"https://msg.cnblogs.com/"} target="_blank" title="消息" style={{ fontSize: "20px" }}><IconFont type="icon-xiaoxi" style={{ color: "#ccc" }} /></a></li>}
                             {isLogin && <li className="Configure"><a href="https://i.cnblogs.com/" target="_blank" title="博客设置"><Icons type="icon-set" className="editico" size="18px" /></a></li>}
                         </div>
                     </div>
@@ -376,7 +397,7 @@ export default class Header extends Component {
                         {
                             !isLogin && <li id="tologin" className="headerList" ><a href={"https://passport.cnblogs.com/login.aspx?ReturnUrl=" + currentUrl}><Icons type="icon-denglu" size=".48rem" /></a></li>
                         }
-                        <li className="menus headerList" onClick={() => showsideMobile()}><a href="javascript:void(0)"><Icons type="icon-menu" title="菜单" /></a></li>
+                        <li className="menus headerList" onClick={() => showsideMobile()}><a href="javascript:void(0)"><Icons type="icon-menu" title="菜单" style={{ fontSize: "20px" }} /></a></li>
                     </div>
 
                     <div id="backtop" title="返回顶部" onClick={this.totop}><Icons type="icon--arrow-up" id="backtopIco" color="#FFF" size="20px" /></div>

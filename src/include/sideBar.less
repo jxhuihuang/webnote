@@ -1,15 +1,22 @@
-#sideBarMain{
+#sideBarMain {
     margin-left: 10px;
     display: none;
 }
-#sideBar-mains{
+
+#sideBar a {
+    color: inherit;
+}
+
+#sideBar-mains {
     margin-left: 10px;
-    .sidebar-block{
+
+    .sidebar-block {
         background: #fff;
-        margin-bottom: 15px;
+        margin-bottom: 10px;
         word-wrap: break-word;
         min-height: 100px;
-        padding-bottom: 15px;
+        // padding-bottom: 15px;
+
         h3 {
             border-bottom: 1px solid #EAEAEA;
             margin-top: 0;
@@ -22,8 +29,9 @@
             font-size: 17px;
             font-weight: 500;
             letter-spacing: 2px;
-            a{
-                &.toptags_more{
+
+            a {
+                &.toptags_more {
                     float: right;
                     margin-right: 20px;
                     font-size: 13px;
@@ -31,44 +39,59 @@
                 }
             }
         }
-        ul{
+
+        ul {
             width: 100%;
-            padding:10px 10px 10px 10px;
+            padding: 10px 10px 10px 10px;
             display: inline-block;
-            box-sizing:border-box;
-            -moz-box-sizing:border-box; /* Firefox */
-            -webkit-box-sizing:border-box; /* Safari */
-            li{
-    
+            box-sizing: border-box;
+            -moz-box-sizing: border-box;
+            /* Firefox */
+            -webkit-box-sizing: border-box;
+
+            /* Safari */
+            li {
+
                 line-height: 1.6;
                 font-size: 14px;
                 color: #666;
                 background: none;
                 padding: 5px 10px;
-                box-sizing:border-box;
-                -moz-box-sizing:border-box; /* Firefox */
-                -webkit-box-sizing:border-box; /* Safari */
-                table-layout:fixed;/* 只有定义了表格的布局算法为fixed，下面td的定义才能起作用。 */  
-                word-break:keep-all; /* 不换行 */
-                white-space:nowrap; /* 不换行 */  
-                overflow:hidden; /* 内容超出宽度时隐藏超出部分的内容 */  
-                text-overflow:ellipsis;/* 当对象内文本溢出时显示省略标记(...) ；需与overflow:hidden;一起使用。*/
-                @media screen and (max-width:640px){
+                box-sizing: border-box;
+                -moz-box-sizing: border-box;
+                /* Firefox */
+                -webkit-box-sizing: border-box;
+                /* Safari */
+                table-layout: fixed;
+                /* 只有定义了表格的布局算法为fixed，下面td的定义才能起作用。 */
+                word-break: keep-all;
+                /* 不换行 */
+                white-space: nowrap;
+                /* 不换行 */
+                overflow: hidden;
+                /* 内容超出宽度时隐藏超出部分的内容 */
+                text-overflow: ellipsis;
+
+                /* 当对象内文本溢出时显示省略标记(...) ；需与overflow:hidden;一起使用。*/
+                @media screen and (max-width:640px) {
                     font-size: .32rem;
                     padding: 8px 10px;
                 }
             }
         }
     }
+
     /***公告***/
-    .blog_aboutUs{
+    .blog_aboutUs {
         background: #fff;
-        padding: 30px 20px 20px 20px;
-        span{
+        padding: 15px 20px 10px 20px;
+
+        span {
             display: inline-block;
         }
-        .news_avatar{
-            figure{
+
+        .news_avatar {
+            figure {
                 display: inline-block;
                 vertical-align: top;
                 margin-right: 10px;
@@ -76,23 +99,28 @@
                 width: 48px;
                 height: 48px;
                 overflow: hidden;
-                a{
+
+                a {
                     display: block;
                 }
             }
-            span{
+
+            span {
                 display: inline-block;
-                .names{
+
+                .names {
                     font-weight: 700;
                     font-size: 17px;
                     margin-bottom: 8px;
-                    a{
-                        color: #757575;
+
+                    a {
+                        color: #333;
                         font-weight: 700;
                         font-size: 17px;
                     }
                 }
-                .subTitle{
+
+                .subTitle {
                     font-size: 13px;
                     overflow: hidden;
                     -o-text-overflow: ellipsis;
@@ -104,27 +132,36 @@
             }
 
         }
-        .news_list{
+
+        .news_list {
             margin-top: 15px;
             color: #888;
             display: flex;
             justify-content: space-between;
-            p{
-                color: #888;
+
+            p {
+                color: #333;
                 line-height: 14px;
                 margin-bottom: 5px;
                 font-size: 13px;
-            } 
+            }
+
+            i {
+                color: #888;
+            }
         }
-        .news_statistic{
-            margin-top: 30px;
+
+        .news_statistic {
+            margin-top: 20px;
             display: flex;
             justify-content: space-between;
             padding: 0 20px;
-            p{
+
+            p {
                 text-align: center;
                 padding: 0;
                 margin-bottom: 10px;
+
                 &.statistic_num {
                     font-size: 20px;
                     color: #333;
@@ -133,19 +170,22 @@
                     padding-bottom: 10px;
                     margin-bottom: 0px;
                 }
-                &.statistic_name{
+
+                &.statistic_name {
                     font-size: 14px;
                     color: #999;
                     line-height: 14px;
-                
+
                 }
-           }
+            }
         }
-        .btn-user{
+
+        .btn-user {
             display: flex;
             justify-content: space-between;
             margin-top: 15px;
-            div{
+
+            div {
                 width: 160px;
                 height: 36px;
                 line-height: 36px;
@@ -153,34 +193,39 @@
                 font-size: 14px;
                 text-align: center;
                 border-radius: 2px;
-                &:hover{
+
+                &:hover {
                     opacity: .90;
                     filter: alpha(opacity=90);
                     color: #FFF;
                 }
-                
+
             }
-            .followsates{
+
+            .followsates {
                 background: #00acf0;
                 color: #FFF;
                 margin-right: 10px;
             }
-            .sendMessage{
-                background:#F07E00;
+
+            .sendMessage {
+                background: #F07E00;
                 color: #FFF;
-                a{
+
+                a {
                     color: inherit;
                     display: block;
                 }
             }
 
         }
-        
+
     }
+
     // 随笔分类
-    .postCategorys{
-        ul{
-            li{
+    .postCategorys {
+        ul {
+            li {
                 display: block;
                 width: 27%;
                 height: 30px;
@@ -191,33 +236,39 @@
                 color: #7c7c7c;
                 text-align: center;
                 overflow: hidden;
-                margin: 0 10px 20px 10px;
+                margin: 0 10px 10px 10px;
                 padding: 0;
-                a{
-                    width:100%;
-                    height:100%;
-                    display:block;
+                font-size: 13px;
+
+                a {
+                    width: 100%;
+                    height: 100%;
+                    display: block;
                     text-align: center;
-                    transition: background-color .3s,color .3s;
-                    filter:alpha(opacity=90);  
-                    -moz-opacity:0.9;  
-                    -khtml-opacity: 0.9;  
-                    opacity: 0.9;  
-                    &:hover{
-                        background-color:#45B6F7;
-                        color:#FFFFFF;
+                    transition: background-color .3s, color .3s;
+                    filter: alpha(opacity=90);
+                    -moz-opacity: 0.9;
+                    -khtml-opacity: 0.9;
+                    opacity: 0.9;
+                    color: inherit;
+
+                    &:hover {
+                        background-color: #45B6F7;
+                        color: #FFFFFF;
                     }
                 }
             }
         }
     }
+
     /***日历**/
-    .blog-calendars{
-        width:100%;
+    .blog-calendars {
+        width: 100%;
         background: #FFF;
         padding: 15px 0;
         margin-bottom: 10px;
-        box-shadow:none;
+        box-shadow: none;
+
         table.Cal {
             border: 1px solid #EDEDED;
             width: 90%;
@@ -225,22 +276,27 @@
             font-size: 12px;
             height: 150px;
             margin: auto;
-            tbody{
+
+            tbody {
                 font-size: 14px;
                 font-variant: tabular-nums;
                 line-height: 1.5;
+
                 th {
                     text-align: center;
                 }
-                td{
+
+                td {
                     padding-top: 5px;
                     padding-bottom: 5px;
                 }
+
                 .CalTodayDay {
                     color: #fff;
                     background: #1890ff;
                 }
             }
+
             .CalTitle {
                 background-color: #fff;
                 border-color: #adf;
@@ -253,37 +309,49 @@
                 height: 100%;
                 border-collapse: separate;
                 border-spacing: 2px;
-                tr{
+
+                tr {
                     height: 32px;
                 }
-                td{
-                    padding:10px;
+
+                td {
+                    padding: 10px;
                 }
-                a{
-                    &:visited,&:active,&:link{
+
+                a {
+
+                    &:visited,
+                    &:active,
+                    &:link {
                         color: #075db3;
                         text-decoration: none;
                     }
                 }
             }
-            
+
         }
     }
+
     /* 活动 */
-    .blog-activity{
-        min-height: auto!important;
-        .activity-main{
-            margin-bottom: 15px;
+    .blog-activity {
+        min-height: auto !important;
+        padding-bottom: 0;
+
+        .activity-main {
+            margin-bottom: 0px;
         }
     }
+
     /***找找看**/
-    .blog-zzks{
-        .zzks-content{
+    .blog-zzks {
+        .zzks-content {
             min-height: 30px;
             padding: 10px 20px 0 20px;
+
             .div_my_zzk {
                 width: 100%;
                 padding-bottom: 15px;
+
                 .input_my_zzk {
                     width: 80%;
                     border: 1px solid #EDEDED;
@@ -291,7 +359,8 @@
                     border-radius: 6px;
                     margin-right: 5px;
                 }
-                input.btn_my_zzk{
+
+                input.btn_my_zzk {
                     top: 6px;
                     height: 30px;
                     right: 6px;
@@ -299,10 +368,11 @@
             }
         }
     }
+
     /***我的标签**/
-    .blog-toptags{
-        ul{
-            li{
+    .blog-toptags {
+        ul {
+            li {
                 font-size: 0;
                 display: inline-block;
                 line-height: 1.2;
@@ -313,11 +383,13 @@
                 border-radius: 8px;
                 opacity: 1;
                 filter: alpha(opacity=100);
-                    &:hover{
-                        opacity: .85;
-                        filter: alpha(opacity=85);
-                    }
-                a{
+
+                &:hover {
+                    opacity: .85;
+                    filter: alpha(opacity=85);
+                }
+
+                a {
                     font-size: 13px;
                     color: #FFF;
                     display: block;
@@ -326,10 +398,11 @@
             }
         }
     }
+
     // 排行
-    .ranking{
-        li{
-            em{
+    .ranking {
+        li {
+            em {
                 font-style: normal;
                 display: inline-block;
                 padding: 0px;
@@ -338,14 +411,16 @@
                 color: #FFF;
                 margin-right: 5px;
                 text-align: center;
-                width: 26px;
+                width: 16px;
+                font-size: 12px;
             }
         }
     }
+
     // 最新随笔
-    .blog-newestPost{
-        li{
-            em{
+    .blog-newestPost {
+        li {
+            em {
                 font-style: normal;
                 display: inline-block;
                 padding: 0px;
@@ -358,11 +433,13 @@
             }
         }
     }
+
     // 博客统计
-    .blog-scorerank{
-        ul{
+    .blog-scorerank {
+        ul {
             padding: 1.375rem 1.5rem 1.5rem;
-            li{
+
+            li {
                 padding: 8px 12px;
                 display: block;
                 background-color: #fff;
@@ -372,84 +449,100 @@
             }
         }
     }
+
     // 档案
-    .blog-archives{
-        ul{
+    .blog-archives {
+        ul {
             overflow: hidden;
             // display: flex;
             flex-wrap: wrap;
             width: 100%;
             padding: 0px 10px 10px 10px;
-            li{
+
+            li {
                 width: 50%;
                 float: left;
             }
         }
-        .archive-more{
+
+        .archive-more {
             height: 36px;
             line-height: 36px;
             text-align: center;
             margin: 0px 0 10px 0;
             color: #00acf0;
             transition: all .4s linear 0s;
-            
-            span{
+
+            span {
                 font-size: 13px;
                 cursor: pointer;
-                @media screen and (max-width:640px){
+
+                @media screen and (max-width:640px) {
                     font-size: .25rem;
                 }
             }
         }
     }
-     /**最新评论**/
-     .blog-recentcomment{
-         ul{
-             li{
+
+    /**最新评论**/
+    .blog-recentcomment {
+        ul {
+            li {
                 border-bottom: 1px solid #EDEDED;
                 margin-bottom: 10px;
-                &:last-child{
+
+                &:last-child {
                     border-bottom: none;
                     margin-bottom: 0;
                 }
-                .sidecomments_user{
-                    .sidecomments_avatar{
-                        width:32px;
-                        height:32px;
+
+                .sidecomments_user {
+                    .sidecomments_avatar {
+                        width: 32px;
+                        height: 32px;
                         overflow: hidden;
                         display: inline-block;
                         vertical-align: middle;
                         margin-right: 5px;
-                        img{
+
+                        img {
                             max-width: 100%;
-                        
+
                         }
                     }
                 }
-                .sidecomments_body{
+
+                .sidecomments_body {
                     margin-top: 5px;
                     word-break: break-all;
                     word-wrap: break-word;
-                    white-space:normal
+                    white-space: normal
                 }
-                .sidecomments_post{
+
+                .sidecomments_post {
                     color: #999;
                     font-size: 12px;
                     margin: 8px 0 3px 0;
-                    table-layout:fixed;/* 只有定义了表格的布局算法为fixed，下面td的定义才能起作用。 */
-                    word-break:keep-all; /* 不换行 */
-                    white-space:nowrap; /* 不换行 */
-                    overflow:hidden; /* 内容超出宽度时隐藏超出部分的内容 */
-                    text-overflow:ellipsis;/* 当对象内文本溢出时显示省略标记(...) ；需与overflow:hidden;一起使用。*/
+                    table-layout: fixed;
+                    /* 只有定义了表格的布局算法为fixed，下面td的定义才能起作用。 */
+                    word-break: keep-all;
+                    /* 不换行 */
+                    white-space: nowrap;
+                    /* 不换行 */
+                    overflow: hidden;
+                    /* 内容超出宽度时隐藏超出部分的内容 */
+                    text-overflow: ellipsis;
+
+                    /* 当对象内文本溢出时显示省略标记(...) ；需与overflow:hidden;一起使用。*/
                     a {
                         color: #999;
                         font-size: 12px;
                     }
                 }
 
-             }
-         }
-     }
+            }
+        }
+    }
 
 }
 
@@ -460,38 +553,43 @@
 
 
 
-.ant-tabs-nav .ant-tabs-tab{
+.ant-tabs-nav .ant-tabs-tab {
     font-size: 15px;
 }
+
 .ant-tabs-nav .ant-tabs-tab-active {
-    color: inherit!important;
+    color: inherit !important;
     font-weight: 500;
 }
+
 .ant-tabs-nav .ant-tabs-tab:active {
-    color: inherit!important;
+    color: inherit !important;
 }
 
 
 /**********************************************移动端***************************************************************/
-@media screen and (max-width:768px){
-    #sideBar{
-        width: 100vw!important;
-        height: 100vh!important;
-        position: fixed!important;
+@media screen and (max-width:768px) {
+    #sideBar {
+        width: 100vw !important;
+        height: 100vh !important;
+        position: fixed !important;
         z-index: 2000;
         background-color: #f9f9f9;
         transform: translate(100%);
         top: 0;
         right: 0;
-        transition: transform .43s cubic-bezier(.3,0,0,1);
-        margin: 0!important;
-        box-sizing:border-box;
-        -moz-box-sizing:border-box; /* Firefox */
-        -webkit-box-sizing:border-box; /* Safari */
+        transition: transform .43s cubic-bezier(.3, 0, 0, 1);
+        margin: 0 !important;
+        box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        /* Firefox */
+        -webkit-box-sizing: border-box;
+        /* Safari */
         overflow: hidden;
         padding: 0;
-        .sideModel-nav{
-            width:100%;
+
+        .sideModel-nav {
+            width: 100%;
             height: 50px;
             background: #FFF;
             position: relative;
@@ -500,14 +598,15 @@
             z-index: 50;
             border-bottom: 1px solid #EEE;
 
-            h2{
+            h2 {
                 height: 50px;
                 line-height: 50px;
                 text-align: center;
                 font-size: .38rem;
             }
-            .sidenav-icon{
-                width:30px;
+
+            .sidenav-icon {
+                width: 30px;
                 height: 50px;
                 line-height: 50px;
                 position: absolute;
@@ -515,13 +614,16 @@
                 left: 15px;
                 display: flex;
                 cursor: pointer;
-                i{
+
+                i {
                     color: #999;
                 }
             }
         }
     }
-    #sideBarMain, #sideBar-mains{
+
+    #sideBarMain,
+    #sideBar-mains {
         height: calc(~"100% - 50px");
         overflow: scroll;
         margin-left: 0px;
@@ -530,14 +632,17 @@
 }
 
 
-.ant-tabs-nav{
+.ant-tabs-nav {
     width: 100%;
-    @media screen and (max-width:640px){
-        margin-bottom: 12px!important;
+
+    @media screen and (max-width:640px) {
+        margin-bottom: 12px !important;
     }
-    .ant-tabs-nav-wrap{
+
+    .ant-tabs-nav-wrap {
         border-bottom: 1px solid #EDEDED;
-        .ant-tabs-tab{
+
+        .ant-tabs-tab {
             font-size: 17px;
         }
     }
