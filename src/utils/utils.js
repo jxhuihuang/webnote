@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import { message } from "antd";
-// import moment from 'moment';
 import { createFromIconfontCN } from "@ant-design/icons";
 const default_data = defaultData || {};
 const httpsType =
@@ -169,7 +168,7 @@ function random(n, type, isDeduplication) {
     type == 1
       ? ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"] // 数字
       : type == 2
-      ? [
+        ? [
           "a",
           "b",
           "c",
@@ -197,48 +196,48 @@ function random(n, type, isDeduplication) {
           "y",
           "z",
         ]
-      : type == 3
-      ? [
-          "0",
-          "1",
-          "2",
-          "3",
-          "4",
-          "5",
-          "6",
-          "7",
-          "8",
-          "9",
-          "a",
-          "b",
-          "c",
-          "d",
-          "e",
-          "f",
-          "g",
-          "h",
-          "i",
-          "j",
-          "k",
-          "l",
-          "m",
-          "n",
-          "o",
-          "p",
-          "q",
-          "r",
-          "s",
-          "t",
-          "u",
-          "v",
-          "w",
-          "x",
-          "y",
-          "z",
-        ]
-      : Array.isArray(type) //自定义数组
-      ? type
-      : [];
+        : type == 3
+          ? [
+            "0",
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8",
+            "9",
+            "a",
+            "b",
+            "c",
+            "d",
+            "e",
+            "f",
+            "g",
+            "h",
+            "i",
+            "j",
+            "k",
+            "l",
+            "m",
+            "n",
+            "o",
+            "p",
+            "q",
+            "r",
+            "s",
+            "t",
+            "u",
+            "v",
+            "w",
+            "x",
+            "y",
+            "z",
+          ]
+          : Array.isArray(type) //自定义数组
+            ? type
+            : [];
   //数字加字母
   num = chars.length - 1;
   var res = "";
@@ -371,7 +370,7 @@ const Icons = ({
   right = "",
   left = "",
   style = {},
-  onClick = () => {},
+  onClick = () => { },
 }) => {
   type = type != "" ? " " + type : "";
   className = className != "" ? " " + className : "";
@@ -397,7 +396,7 @@ const ajaxFa = function (
     dataType = "json",
     types = "post",
     showErrorMsg = false,
-    errors = () => {},
+    errors = () => { },
   } = {}
 ) {
   const $this = this;

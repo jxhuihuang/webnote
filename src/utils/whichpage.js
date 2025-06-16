@@ -5,6 +5,7 @@ import {
   removeNull,
   checkNull,
   isContain,
+  trim
 } from "./utils";
 
 const Whichpage = (url = BootCommons.currentUrl) => {
@@ -134,13 +135,15 @@ const Whichpage = (url = BootCommons.currentUrl) => {
       break;
     case "gallery": // 相册
       var wharchive1 = _url.split("gallery/")[1];
-      if (wharchive1.indexOf("/") == "-1") {
-        webpages = "photolist";
-        subPages = "photolist";
-      }
-      if (wharchive1.indexOf("/") != "-1") {
+      // if (wharchive1.indexOf("/") == "-1") {
+
+      // }
+      if (wharchive1.indexOf("/image") != "-1") {
         webpages = "photoinfo";
         subPages = "photoinfo";
+      } else {
+        webpages = "photolist";
+        subPages = "photolist";
       }
       break;
     case "RecentComments": //评论列表

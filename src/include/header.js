@@ -112,8 +112,8 @@ export default class Header extends Component {
       case "postList":
         let entrylistTitle = $(".entrylistTitle").html()
           ? $(".entrylistTitle")
-              .html()
-              .replace(/(^\s*)|(\s*$)/g, "")
+            .html()
+            .replace(/(^\s*)|(\s*$)/g, "")
           : "";
         currentnav =
           entrylistTitle.indexOf("-") >= 0
@@ -258,7 +258,7 @@ export default class Header extends Component {
             ? "https://home.cnblogs.com/u/" + userInfo.blogApp
             : "",
         icon: "icon-home",
-        isCheckAdmin: "false",
+        isCheckAdmin: "true",
       },
       {
         title: "园子",
@@ -270,13 +270,13 @@ export default class Header extends Component {
         title: "我的收藏",
         link: "https://wz.cnblogs.com",
         icon: "icon-shoucang1",
-        isCheckAdmin: "false",
+        isCheckAdmin: "true",
       },
       {
         title: "我的消息",
         link: "https://msg.cnblogs.com/inbox",
         icon: "icon-xiaoxi",
-        isCheckAdmin: "false",
+        isCheckAdmin: "true",
       },
       // {
       //     title:"账号中心",
@@ -301,41 +301,43 @@ export default class Header extends Component {
 
     const menu = (
       <Menu>
-        <div className="writepost an-row">
-          <a
-            className="wdyz"
-            href="https://i.cnblogs.com/posts/edit"
-            target="_blank"
-          >
-            <Icons
-              type="icon-bianji1"
-              size="14px"
-            />
-            写随笔
-          </a>
-          <a
-            className="wdyz"
-            href="https://i.cnblogs.com/articles/edit"
-            target="_blank"
-          >
-            <Icons
-              type="icon-bianji"
-              size="14px"
-            />
-            写文章
-          </a>
-          <a
-            className="wdyz"
-            href="https://i.cnblogs.com/diaries/edit"
-            target="_blank"
-          >
-            <Icons
-              type="icon-bianji2"
-              size="14px"
-            />
-            写日记
-          </a>
-        </div>
+        {isadmin && (
+          <div className="writepost an-row">
+            <a
+              className="wdyz"
+              href="https://i.cnblogs.com/posts/edit"
+              target="_blank"
+            >
+              <Icons
+                type="icon-bianji1"
+                size="14px"
+              />
+              写随笔
+            </a>
+            <a
+              className="wdyz"
+              href="https://i.cnblogs.com/articles/edit"
+              target="_blank"
+            >
+              <Icons
+                type="icon-bianji"
+                size="14px"
+              />
+              写文章
+            </a>
+            <a
+              className="wdyz"
+              href="https://i.cnblogs.com/diaries/edit"
+              target="_blank"
+            >
+              <Icons
+                type="icon-bianji2"
+                size="14px"
+              />
+              写日记
+            </a>
+          </div>
+        )}
         {userDropdownData.map((obj, i) => {
           if (obj.link && obj.link !== "") {
             if (obj.isCheckAdmin === "true") {
@@ -730,7 +732,7 @@ export default class Header extends Component {
                   </a>
                 </div>
               </div>
-              <div className="mt0-5_r list-warp">
+              {isadmin && (<div className="mt0-5_r list-warp">
                 <div
                   className="list-box arrow"
                   onClick={() => {
@@ -761,7 +763,7 @@ export default class Header extends Component {
                     <div className="list-title">写日记</div>
                   </div>
                 </div>
-              </div>
+              </div>)}
               <div className="mt0-5_r list-warp">
                 {userDropdownData.map((obj, i) => {
                   if (obj.link && obj.link !== "") {
@@ -829,7 +831,7 @@ export default class Header extends Component {
                   onClick={() => {
                     linkTo(
                       "https://passport.cnblogs.com/logout.aspx?ReturnUrl=" +
-                        currentUrl
+                      currentUrl
                     );
                   }}
                 >

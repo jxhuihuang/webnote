@@ -1,6 +1,5 @@
 import React, { Component, Fragment } from 'react'
 import { render } from 'react-dom';
-import moment from 'moment';
 import Maintain from './src/components/isMaintain';
 import { Button, message } from 'antd'
 import Header from './src/include/header.js';
