@@ -37,16 +37,15 @@ const { TabPane } = Tabs;
 
 let sideBar = function (blogInfo) {
   $("#sideBar").prepend(`
-        ${
-          isMobile
-            ? `
+        ${isMobile
+      ? `
                 <div class="sideModel-nav" >
                     <span class="sidenav-icon"><i class="iconfont icon--left" style="font-size:22px"}  title="返回"></i> </span>
                     <h2>导航</h2>
                 </div>
             `
-            : ``
-        }
+      : ``
+    }
         <div id="sideBar-mains"></div>
     `);
   $(".sidenav-icon").on("click", function () {
@@ -799,7 +798,7 @@ let sideBar = function (blogInfo) {
               ) : category.length === 2 ? (
                 <Tabs
                   defaultActiveKey="1"
-                  onChange={() => {}}
+                  onChange={() => { }}
                   tabBarStyle={{ paddingLeft: "10px", marginBottom: "5px" }}
                 >
                   {category.map((objs, j) => {
@@ -1013,7 +1012,7 @@ let sideBar = function (blogInfo) {
               ) : archives.length === 2 ? (
                 <Tabs
                   defaultActiveKey="1"
-                  onChange={() => {}}
+                  onChange={() => { }}
                   tabBarStyle={{ paddingLeft: "10px", marginBottom: "5px" }}
                 >
                   {archives.map((objs, j) => {
@@ -1082,10 +1081,10 @@ let sideBar = function (blogInfo) {
                               i === 0
                                 ? "#ff3300"
                                 : i === 1
-                                ? "#ff6600"
-                                : i === 2
-                                ? "#ff9900"
-                                : "#afb2b7",
+                                  ? "#ff6600"
+                                  : i === 2
+                                    ? "#ff9900"
+                                    : "#afb2b7",
                           }}
                         >
                           {obj.id}
@@ -1113,7 +1112,7 @@ let sideBar = function (blogInfo) {
               <ul>
                 {recentcomment.map((obj, i) => {
                   return (
-                    <li>
+                    <li key={i}>
                       <div class="sidecomments_user">
                         <span class="sidecomments_avatar">
                           <img src={userdefaultAvatars} />
@@ -1175,10 +1174,10 @@ let sideBar = function (blogInfo) {
                               i === 0
                                 ? "#ff3300"
                                 : i === 1
-                                ? "#ff6600"
-                                : i === 2
-                                ? "#ff9900"
-                                : "#afb2b7",
+                                  ? "#ff6600"
+                                  : i === 2
+                                    ? "#ff9900"
+                                    : "#afb2b7",
                           }}
                         >
                           {obj.id}
@@ -1211,10 +1210,10 @@ let sideBar = function (blogInfo) {
                               i === 0
                                 ? "#ff3300"
                                 : i === 1
-                                ? "#ff6600"
-                                : i === 2
-                                ? "#ff9900"
-                                : "#afb2b7",
+                                  ? "#ff6600"
+                                  : i === 2
+                                    ? "#ff9900"
+                                    : "#afb2b7",
                           }}
                         >
                           {obj.id}

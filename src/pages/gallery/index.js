@@ -119,9 +119,9 @@ let galleryList = function (galleryArry = [], blogInfo) {
                 <Fragment>
                     <div className="gallery-content">
                         {
-                            waterFallData.map((obj) => {
+                            waterFallData.map((obj, index) => {
                                 return (
-                                    <div class="galleryMain_flex" id={"gallery_" + obj.id} ref={"gallery_" + obj.id} style={{ "width": obj.col_width }}>
+                                    <div key={index} class="galleryMain_flex" id={"gallery_" + obj.id} ref={"gallery_" + obj.id} style={{ "width": obj.col_width }}>
 
                                         {
                                             obj.data && (obj.data).length > 0 &&

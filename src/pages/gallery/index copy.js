@@ -1,7 +1,6 @@
 
 import React, { Component, Fragment } from 'react'
 import { render } from 'react-dom';
-import { Tabs } from 'antd';
 import { BootCommons, addkeys, removeobj } from '../../utils/utils'
 import { Loadding } from 'antd'
 import "./index.less";

@@ -8,10 +8,10 @@ import {
   trim
 } from "./utils";
 
-const Whichpage = (url = BootCommons.currentUrl) => {
+const getWhichpage = (url = BootCommons.currentUrl) => {
   let _url = url;
   _url = getcurrentUrl(_url);
-  const blogApp = BootCommons.blogApp;
+  const blogApp = BootCommons.blogApp || 'bigweb';
   let webpages = "";
   let pagesName = "default";
   let pageurl = blogApp != "" ? removeNull(_url.split(blogApp)[1]) : _url;
@@ -28,6 +28,7 @@ const Whichpage = (url = BootCommons.currentUrl) => {
   }
   checkNull(pagesName) == "" ? "default" : pagesName;
   let subPages = "";
+
   switch (pagesName) {
     case "default": //主页
       webpages = "index";
@@ -39,9 +40,7 @@ const Whichpage = (url = BootCommons.currentUrl) => {
       webpages = "list";
       subPages = "postList";
       if ($("#main .entrylistItem").length > 0) {
-        let entrylistHref = $("#main .entrylistItem .entrylistItemTitle").attr(
-          "href"
-        );
+        let entrylistHref = $("#main .entrylistItem .entrylistItemTitle").attr("href");
         const typeName = trim($("#main .category-crumb-item").html());
         classifyName = typeName;
         if (isContain(entrylistHref, "articles")) {
@@ -56,10 +55,7 @@ const Whichpage = (url = BootCommons.currentUrl) => {
     case "p": //随笔详情
       let posttle = _url.split("/p")[1];
       if (posttle.indexOf("/") == 0) {
-        posttle = posttle.substring(
-          posttle.indexOf("/") + 1,
-          posttle.indexOf(".")
-        );
+        posttle = posttle.substring(posttle.indexOf("/") + 1, posttle.indexOf("."));
       }
       if (posttle.indexOf(".") > 0) {
         posttle = posttle.substring(0 + 1, posttle.indexOf("."));
@@ -167,4 +163,4 @@ const Whichpage = (url = BootCommons.currentUrl) => {
   return obj;
 };
 
-export default Whichpage;
+export default getWhichpage;

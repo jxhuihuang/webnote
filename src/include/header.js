@@ -10,7 +10,7 @@ import {
   stringToArry,
   IconFont,
 } from "../utils/utils.js";
-import { message, Dropdown, Menu, Input } from "antd";
+import {  Dropdown, Menu, Input } from "antd";
 import {
   getPostcategory,
   showsideMobile,
@@ -343,7 +343,7 @@ export default class Header extends Component {
             if (obj.isCheckAdmin === "true") {
               if (isadmin) {
                 return (
-                  <Menu.Item className="overlayList">
+                  <Menu.Item className="overlayList" key={i}>
                     <a
                       href={obj.link}
                       target="_blank"
@@ -360,7 +360,7 @@ export default class Header extends Component {
               }
             } else {
               return (
-                <Menu.Item className="overlayList">
+                <Menu.Item className="overlayList" key={i}>
                   <a
                     href={obj.link}
                     target="_blank"
@@ -483,7 +483,6 @@ export default class Header extends Component {
                   >
                     <a
                       className="ant-dropdown-link login_namez"
-                      href="javascript:void(0)"
                     >
                       <em className="pc-show login_name an-row-center-all">
                         <img
@@ -665,7 +664,7 @@ export default class Header extends Component {
               className="menus headerList"
               onClick={() => showsideMobile()}
             >
-              <a href="javascript:void(0)">
+              <a>
                 <Icons
                   type="icon-menu"
                   title="菜单"
@@ -721,11 +720,9 @@ export default class Header extends Component {
                 </div>
                 <div className="sideUser_avatarRight">
                   <a
-                    href={
-                      userInfo.blogApp && userInfo.blogApp !== ""
-                        ? "https://home.cnblogs.com/u/" + userInfo.blogApp
-                        : "javascript:void(0)"
-                    }
+                    {...(userInfo.blogApp && userInfo.blogApp !== "") && {
+                      href: "https://home.cnblogs.com/u/" + userInfo.blogApp
+                    }}
                     className="arrow"
                   >
                     个人主页
@@ -771,6 +768,7 @@ export default class Header extends Component {
                       if (isadmin) {
                         return (
                           <div
+                            key={i}
                             className="list-box arrow"
                             onClick={() => {
                               linkTo(obj.link);
@@ -785,6 +783,7 @@ export default class Header extends Component {
                     } else {
                       return (
                         <div
+                          key={i}
                           className="list-box arrow"
                           onClick={() => {
                             linkTo(obj.link);

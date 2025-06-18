@@ -601,21 +601,19 @@ function linkmao(href = "") {
   $("html,body").animate({ scrollTop: scrollTops - 60 + "px" }, 400);
 }
 /****获取当前网站url */
-function getcurrentUrl(currentUrl) {
-  currentUrl = currentUrl || "";
-  if (currentUrl == "") {
+function getcurrentUrl(currentUrl1) {
+  let newCurrentUrl = currentUrl1 || currentUrl;
+  if (newCurrentUrl == "") {
     return "";
   }
-  // currentUrl=currentUrl.indexOf("/index.html")?currentUrl.split("/index.html")[0]:currentUrl;
-  currentUrl =
-    currentUrl.indexOf("?") > 0 ? currentUrl.split("?")[0] : currentUrl;
-  currentUrl =
-    currentUrl.indexOf("#") > 0 ? currentUrl.split("#")[0] : currentUrl;
-  currentUrl =
-    currentUrl.lastIndexOf("/") == currentUrl.length - 1
-      ? currentUrl.substring(0, currentUrl.lastIndexOf("/"))
-      : currentUrl;
-  return currentUrl;
+  // newCurrentUrl=newCurrentUrl.indexOf("/index.html")?newCurrentUrl.split("/index.html")[0]:newCurrentUrl;
+  newCurrentUrl = newCurrentUrl.indexOf("?") > 0 ? newCurrentUrl.split("?")[0] : newCurrentUrl;
+  if (process.env.NODE_ENV == "production") {
+    newCurrentUrl = newCurrentUrl.indexOf("#") > 0 ? newCurrentUrl.split("#")[0] : newCurrentUrl;
+    console.log("我是线上");
+  }
+  newCurrentUrl = newCurrentUrl.lastIndexOf("/") == newCurrentUrl.length - 1 ? newCurrentUrl.substring(0, newCurrentUrl.lastIndexOf("/")) : newCurrentUrl;
+  return newCurrentUrl;
 }
 // 分离字符串
 function stringSplit(value, key) {
@@ -744,6 +742,7 @@ function getNearEle(ele, type) {
   }
   return null;
 }
+
 function addkeys(datas, key = "key") {
   if (!datas) {
     return "";

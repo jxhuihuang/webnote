@@ -5,13 +5,13 @@ var HtmlWebpackPlugin = require("html-webpack-plugin");
 var CleanPlugin = require("clean-webpack-plugin");
 var CopyWebpackPlugin = require("copy-webpack-plugin");
 var webpack = require("webpack");
+const { type } = require("os");
 
 //webpack --config 文件名.js -w        /*执行另一个配置文件*/
 /*  babel-preset-stage-0  没有--save的模块*/
 var config = {
   entry: {
     index: "./index.js",
-    // test: "./test.js",
   },
   output: {
     path: "./build/",
@@ -20,12 +20,22 @@ var config = {
   },
   devServer: {
     port: 9090,
-    // host: "0.0.0.0", ////默认lolaohost，也可0.0.0.0，这样同一网段的主机都能通过ip访问
+    host: "127.0.0.1", ////默认lolaohost，也可0.0.0.0，这样同一网段的主机都能通过ip访问
     // open:true,     //build自动打开浏览器
     // compress:true,  //浏览器请求静态资源时压缩一下，打开浏览器的检查时可以看到bundle.js的content-encoding是gzip，浏览器自动解压
-    // proxy:"",
-    // contentBase: path.join(__dirname, 'dist'), //# 告诉服务器从哪里提供内容
+    // proxy: {             // 配置代理，防止跨域问题
+    //     '/api': {
+    //         target: 'https://api.github.com', // http://localhost:8080/api/users -> https://api.github.com/api/users
+    //         pathRewrite: {                    // http://localhost:8080/api/users -> https://api.github.com/users
+    //             '^/api': ''
+    //         },
+    //         // 不能使用 localhost:8080 作为请求 GitHub 的主机名
+    //         changeOrigin: true
+    //     }
+    // }
+    // contentBase: path.join(__dirname, 'dist'), //# 告诉服务器从哪里提供内容   //path.resolve(__dirname,'dist'),// 指定静态资源路径的根目录，需要对应output:path为dist，
     hot: true, //# 是否热部署，
+    type: ''
   },
   module: {
     loaders: [

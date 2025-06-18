@@ -58,38 +58,14 @@ function getBlogInfo() {
           getdata.indexOf("('") + 2,
           getdata.indexOf("')")
         );
-        const admin_name = $(UserInfoData)
-          .find("a:first")
-          .html()
-          .replace(/\s/g, "");
-        let joinData = $(UserInfoData)
-          .find("a")
-          .eq(1)
-          .attr("title")
-          .split("入园时间：")[1];
-        let joinTime = $(UserInfoData)
-          .find("a")
-          .eq(1)
-          .html()
-          .replace(/\s/g, "");
-        let followers = $(UserInfoData)
-          .find("a")
-          .eq(2)
-          .html()
-          .replace(/\s/g, "");
-        let followees = $(UserInfoData)
-          .find("a")
-          .eq(3)
-          .html()
-          .replace(/\s/g, "");
-        followers =
-          followers.indexOf("-") >= 0 ? followers.split("-")[1] : followers;
-        followees =
-          followees.indexOf("-") >= 0 ? followees.split("-")[1] : followees;
-        $(document).attr(
-          "title",
-          $(document).attr("title").replace(admin_name, blogTitle)
-        ); //修改标题 .replace("- 博客园", "")
+        const admin_name = $(UserInfoData).find("a:first").html().replace(/\s/g, "");
+        let joinData = $(UserInfoData).find("a").eq(1).attr("title").split("入园时间：")[1];
+        let joinTime = $(UserInfoData).find("a").eq(1).html().replace(/\s/g, "");
+        let followers = $(UserInfoData).find("a").eq(2).html().replace(/\s/g, "");
+        let followees = $(UserInfoData).find("a").eq(3).html().replace(/\s/g, "");
+        followers = followers.indexOf("-") >= 0 ? followers.split("-")[1] : followers;
+        followees = followees.indexOf("-") >= 0 ? followees.split("-")[1] : followees;
+        $(document).attr("title", $(document).attr("title").replace(admin_name, blogTitle)); //修改标题 .replace("- 博客园", "")
         blogInfoObj.admin_name = admin_name; //园主昵称
         blogInfoObj.blogUserGuid = flows; // 关注Id
         blogInfoObj.joinData = joinData; //入园日期
@@ -100,61 +76,47 @@ function getBlogInfo() {
         blogInfoObj.blogSubTitle = blogSubTitle; //博客副标题
         blogInfoObj.blogAvatar = avatar ? avatar : bolgdefaultAvatars;
         /****获取统计数 */
+        console.log("获取统计数",)
         if ($(".blogStats").length > 0) {
-          let post_count = $(".blogStats")
-            .find("#stats_post_count")
-            .html()
-            .replace(/\s/g, "");
+          let post_count = $(".blogStats").find("#stats_post_count").html().replace(/\s/g, "");
           blogInfoObj.post_count = parseInt(post_count.split("-")[1]); //随笔数
-          let article_count = $(".blogStats")
-            .find("#stats_article_count")
-            .html()
-            .replace(/\s/g, "");
+          let article_count = $(".blogStats").find("#stats_article_count").html().replace(/\s/g, "");
           blogInfoObj.article_count = parseInt(article_count.split("-")[1]); //文章数
-          let comment_count = $(".blogStats")
-            .find("#stats-comment_count")
-            .html()
-            .replace(/\s/g, "");
+          let comment_count = $(".blogStats").find("#stats-comment_count").html().replace(/\s/g, "");
           blogInfoObj.comment_count = parseInt(comment_count.split("-")[1]); //评论数
         }
         blogInfoObj.state = 1;
         // 获取登录用户信息
+        console.log("获取登录用户信息",)
         if (blogInfoObj.isLogin) {
           blogInfoObj.username = isBlogOwner ? admin_name : "";
           let userAvatar = userdefaultAvatars;
           if ($("#nav_main .navbar-avatar").length > 0) {
-            userAvatar =
-              $("#nav_main .navbar-avatar").attr("src") || userdefaultAvatars;
+            userAvatar = $("#nav_main .navbar-avatar").attr("src") || userdefaultAvatars;
             let user_blogAdress = $("#navblog-myblog-icon").attr("href") || "";
             user_blogAdress = getcurrentUrl(user_blogAdress);
-            let user_BlogApp =
-              user_blogAdress.indexOf("cnblogs.com/") > 0
-                ? user_blogAdress.split("cnblogs.com/")[1]
-                : "";
+            let user_BlogApp = user_blogAdress.indexOf("cnblogs.com/") > 0 ? user_blogAdress.split("cnblogs.com/")[1] : "";
             blogInfoObj.user_blogAdress = user_blogAdress;
             blogInfoObj.user_BlogApp = user_BlogApp;
           }
-
-          blogInfoObj.userAvatar = isBlogOwner
-            ? blogInfoObj.blogAvatar
-            : userAvatar;
-          resolve(blogInfoObj);
+          blogInfoObj.userAvatar = isBlogOwner ? blogInfoObj.blogAvatar : userAvatar;
+          console.log("blogInfoObj:", blogInfoObj)
+          // resolve(blogInfoObj);
         } else {
           blogInfoObj.username = "";
           blogInfoObj.userAvatar = loginAvatars;
-          resolve(blogInfoObj);
+          // resolve(blogInfoObj);
         }
+        resolve(blogInfoObj);
+      }, ctx + "/ajax/news.aspx", {
+      dataType: "text",
+      types: "GET",
+      errors: (error) => {
+        console.log("ajaxFa errors:", errors)
+        error = error || "";
+        resolve({ state: 0 });
       },
-      ctx + "/ajax/news.aspx",
-      {
-        dataType: "text",
-        types: "GET",
-        errors: (error) => {
-          error = error || "";
-          console.log("blogInfo error:", error);
-          resolve({ state: 0 });
-        },
-      }
+    }
     );
   });
 }
@@ -170,7 +132,7 @@ function getUserInfo() {
       success: function (n) {
         resolve(n);
       },
-      error: function () {},
+      error: function () { },
     });
   });
 }
@@ -190,10 +152,7 @@ const getPostcategory = () => {
           let $postcategory = $str.find("#sidebar_postcategory");
           for (let i = 0; i < $postcategory.find("li").length; i++) {
             let $_this = $postcategory.find("li:eq(" + i + ")");
-            let values = $_this
-              .find("a")
-              .html()
-              .replace(/(^\s*)|(\s*$)/g, "");
+            let values = $_this.find("a").html().replace(/(^\s*)|(\s*$)/g, "");
             let name = remLastbrackval(values);
             let num = getLastbrackval(values); //获取最后括号的数字;
             let link = $_this.find("a").attr("href");
@@ -231,25 +190,13 @@ function getcbpdes(str) {
 
   if ($this.find(".c_b_p_desc").length > 0) {
     if ($this.find(".c_b_p_desc  img").length > 0) {
-      cbpdesData.imgScr =
-        httpsType +
-        removehttp($this.find(".c_b_p_desc  img:first").attr("src"));
+      cbpdesData.imgScr = httpsType + removehttp($this.find(".c_b_p_desc  img:first").attr("src"));
     }
     let cbpdesHtml = $this.find(".c_b_p_desc").html() || "";
-    let cbpdes = cbpdesHtml
-      .replace("摘要：", "")
-      .replace(/\<a.*?\>.*?\<\/a\>/g, "")
-      .replace(/\<img.*?\>/g, "")
-      .replace(/(^\s*)|(\s*$)/g, "");
-    cbpdes = cbpdes.includes("原文链接")
-      ? cbpdes.split("原文链接")[0].replace(/(^\s*)|(\s*$)/g, "")
-      : cbpdes;
-    if (
-      cbpdes === "只有博主才能阅读该文。" ||
-      cbpdes === "只有博主才能阅读该文。"
-    ) {
-      console.log("cbpdes:", cbpdes);
-
+    let cbpdes = cbpdesHtml.replace("摘要：", "").replace(/\<a.*?\>.*?\<\/a\>/g, "").replace(/\<img.*?\>/g, "").replace(/(^\s*)|(\s*$)/g, "");
+    cbpdes = cbpdes.includes("原文链接") ? cbpdes.split("原文链接")[0].replace(/(^\s*)|(\s*$)/g, "") : cbpdes;
+    if (cbpdes === "只有博主才能阅读该文。" || cbpdes === "只有博主才能阅读该文。") {
+      // console.log("cbpdes:", cbpdes);
       cbpdesData.isAdminOnlyReader = "true";
     }
     cbpdesData.cbpdes = isMobile ? cutstr(cbpdes, 100) : cbpdes; //文章摘要
@@ -258,10 +205,7 @@ function getcbpdes(str) {
     $this.find(".cnblogs-post-body").length > 0
   ) {
     //显示全文
-    let postContent =
-      $this.find(".detail-content").html() ||
-      $this.find(".cnblogs-post-body").html() ||
-      "";
+    let postContent = $this.find(".detail-content").html() || $this.find(".cnblogs-post-body").html() || "";
     cbpdesData.cbpdes = postContent;
     cbpdesData.type = "postbody";
   }
@@ -281,14 +225,8 @@ function getPostLisst(whichpage, blogInfo) {
           let lengths = $this.find(".postTitle").length;
           if (lengths === 1) {
             let objs = {};
-            objs.title = $this
-              .find(".postTitle")
-              .html()
-              .replace(/(^\s*)|(\s*$)/g, "");
-            objs.link = $this
-              .find(".postTitle a")
-              .attr("href")
-              .replace(/(^\s*)|(\s*$)/g, "");
+            objs.title = $this.find(".postTitle").html().replace(/(^\s*)|(\s*$)/g, "");
+            objs.link = $this.find(".postTitle a").attr("href").replace(/(^\s*)|(\s*$)/g, "");
             // 获取摘要
             let cbpdesObj = getcbpdes($this);
             objs.cbpdes = cbpdesObj.cbpdes || "";
@@ -302,19 +240,14 @@ function getPostLisst(whichpage, blogInfo) {
             if (blogInfo.isadmin) {
               PostLisstObject.push(objs);
             } else {
-              cbpdesObj.isAdminOnlyReader !== "true"
-                ? PostLisstObject.push(objs)
-                : "";
+              cbpdesObj.isAdminOnlyReader !== "true" ? PostLisstObject.push(objs) : "";
             }
           } else if (lengths > 1) {
             for (var i = 0; i < $this.find(".postTitle").length; i++) {
               let $_this = $this.find(".postTitle").eq(i);
               let objs1 = {};
               objs1.title = $_this.html().replace(/(^\s*)|(\s*$)/g, "");
-              objs1.link = $_this
-                .find("a")
-                .attr("href")
-                .replace(/(^\s*)|(\s*$)/g, "");
+              objs1.link = $_this.find("a").attr("href").replace(/(^\s*)|(\s*$)/g, "");
               // 获取摘要
               let cbpdesObj = getcbpdes($_this.next());
               objs1.cbpdes = cbpdesObj.cbpdes || "";
@@ -329,9 +262,7 @@ function getPostLisst(whichpage, blogInfo) {
               if (blogInfo.isadmin) {
                 PostLisstObject.push(objs1);
               } else {
-                cbpdesObj.isAdminOnlyReader !== "true"
-                  ? PostLisstObject.push(objs1)
-                  : "";
+                cbpdesObj.isAdminOnlyReader !== "true" ? PostLisstObject.push(objs1) : "";
               }
             }
           }
@@ -345,32 +276,20 @@ function getPostLisst(whichpage, blogInfo) {
         for (let i = 0; i < $(".forFlow").find(".entrylistItem").length; i++) {
           let $this = $(".forFlow").find(".entrylistItem:eq(" + i + ")");
           let objs = {};
-          objs.title = $this
-            .find(".entrylistItemTitle")
-            .html()
-            .replace(/(^\s*)|(\s*$)/g, "");
-          objs.link = $this
-            .find(".entrylistPosttitle a")
-            .attr("href")
-            .replace(/(^\s*)|(\s*$)/g, "");
+          objs.title = $this.find(".entrylistItemTitle").html().replace(/(^\s*)|(\s*$)/g, "");
+          objs.link = $this.find(".entrylistPosttitle a").attr("href").replace(/(^\s*)|(\s*$)/g, "");
           // 获取摘要
           let cbpdesObj = getcbpdes($this);
           objs.cbpdes = cbpdesObj.cbpdes || "";
           objs.cbpdes_img = cbpdesObj.imgScr || "";
           objs.cbpdes_type = cbpdesObj.type || "";
           // 获取文章其他信息
-          let footInfo = getlistfootInfo(
-            $this.find(".entrylistItemPostDesc"),
-            whichpage
-          );
+          let footInfo = getlistfootInfo($this.find(".entrylistItemPostDesc"), whichpage);
           objs.footInfo = footInfo || {};
-
           if (blogInfo.isadmin) {
             PostLisstObject.push(objs);
           } else {
-            cbpdesObj.isAdminOnlyReader !== "true"
-              ? PostLisstObject.push(objs)
-              : "";
+            cbpdesObj.isAdminOnlyReader !== "true" ? PostLisstObject.push(objs) : "";
           }
         }
       }
@@ -382,14 +301,8 @@ function getPostLisst(whichpage, blogInfo) {
         for (let i = 0; i < $(".forFlow").find(".PostList").length; i++) {
           let $this = $(".forFlow").find(".PostList:eq(" + i + ")");
           let objs = {};
-          objs.title = $this
-            .find(".postTitl2")
-            .html()
-            .replace(/(^\s*)|(\s*$)/g, "");
-          objs.link = $this
-            .find(".postTitl2 a")
-            .attr("href")
-            .replace(/(^\s*)|(\s*$)/g, "");
+          objs.title = $this.find(".postTitl2").html().replace(/(^\s*)|(\s*$)/g, "");
+          objs.link = $this.find(".postTitl2 a").attr("href").replace(/(^\s*)|(\s*$)/g, "");
           // 获取文章其他信息
           let footInfo = getlistfootInfo($this.find(".postDesc2"), whichpage);
           objs.footInfo = footInfo || {};
@@ -409,68 +322,58 @@ function showPostList(item = []) {
                 <article>
                     <div class="post-mains">
                         <h3><a href="${obj.link}">${obj.title}</a></h3>
-                        ${
-                          obj.cbpdes_type === "postbody"
-                            ? `<div class="desc_body">${obj.cbpdes}</div>`
-                            : obj.cbpdes_img
-                            ? `<div class="post-des ${
-                                obj.cbpdes_img
-                                  ? "text-overflow-2"
-                                  : "text-overflow-3"
-                              }">${obj.cbpdes}</div>`
-                            : obj.cbpdes
-                            ? `<div class="post-des ${
-                                obj.cbpdes_img
-                                  ? "text-overflow-2"
-                                  : "text-overflow-3"
-                              }">${obj.cbpdes}</div>`
-                            : ``
-                        }
-                        ${
-                          Object.getOwnPropertyNames(obj.footInfo).length > 0
-                            ? `
+                        ${obj.cbpdes_type === "postbody"
+          ? `<div class="desc_body">${obj.cbpdes}</div>`
+          : obj.cbpdes_img
+            ? `<div class="post-des ${obj.cbpdes_img
+              ? "text-overflow-2"
+              : "text-overflow-3"
+            }">${obj.cbpdes}</div>`
+            : obj.cbpdes
+              ? `<div class="post-des ${obj.cbpdes_img
+                ? "text-overflow-2"
+                : "text-overflow-3"
+              }">${obj.cbpdes}</div>`
+              : ``
+        }
+                        ${Object.getOwnPropertyNames(obj.footInfo).length > 0
+          ? `
                                 <div class="post-footer">
                                     <div>
-                                        <span class="footer-datetime"><i class="iconfont icon-shijian1 shijian"></i>${
-                                          obj.footInfo.date
-                                        }</span>
+                                        <span class="footer-datetime"><i class="iconfont icon-shijian1 shijian"></i>${obj.footInfo.date
+          }</span>
                                     </div>
                                     <div>
-                                        ${
-                                          obj.footInfo.reads
-                                            ? `<span class="reads"><i class="iconfont icon-look  mr5"/><em>${obj.footInfo.reads}</em>  </span>`
-                                            : ""
-                                        }
-                                        ${
-                                          obj.footInfo.coments
-                                            ? `<span class="coments"><a href="${obj.link}#comments" style="color:inherit"><i class="iconfont icon-pinglun  mr5"  /><em>${obj.footInfo.coments}</em></span></a>`
-                                            : ""
-                                        }
-                                        ${
-                                          obj.footInfo.diggs
-                                            ? `<span class="diggs"><span class="icon-box"><i class="iconfont icon-zan  mr5" /></span> <em> ${obj.footInfo.diggs} </em></span>`
-                                            : ""
-                                        }
-                                        ${
-                                          isadmin
-                                            ? `<span class="edits"><a href="${obj.footInfo.editLink}" target="_blink" style="color:inherit"><i class="iconfont icon-bianji3  mr5" />编辑</a></span>`
-                                            : ``
-                                        }
+                                        ${obj.footInfo.reads
+            ? `<span class="reads"><i class="iconfont icon-look  mr5"/><em>${obj.footInfo.reads}</em>  </span>`
+            : ""
+          }
+                                        ${obj.footInfo.coments
+            ? `<span class="coments"><a href="${obj.link}#comments" style="color:inherit"><i class="iconfont icon-pinglun  mr5"  /><em>${obj.footInfo.coments}</em></span></a>`
+            : ""
+          }
+                                        ${obj.footInfo.diggs
+            ? `<span class="diggs"><span class="icon-box"><i class="iconfont icon-zan  mr5" /></span> <em> ${obj.footInfo.diggs} </em></span>`
+            : ""
+          }
+                                        ${isadmin
+            ? `<span class="edits"><a href="${obj.footInfo.editLink}" target="_blink" style="color:inherit"><i class="iconfont icon-bianji3  mr5" />编辑</a></span>`
+            : ``
+          }
                                     </div>
                                 </div>
                             `
-                            : ``
-                        }
+          : ``
+        }
                     </div>
-                    ${
-                      obj.cbpdes_img
-                        ? `
+                    ${obj.cbpdes_img
+          ? `
                         <figure>
                             <img src="${obj.cbpdes_img}" />
                         </figure>
                         `
-                        : ``
-                    }
+          : ``
+        }
                 </article>
             `;
     });
@@ -482,59 +385,50 @@ function showPostList(item = []) {
                 <article>
                     <div class="post-mains">
                         <h3><a href="${obj.link}">${obj.title}</a></h3>
-                        ${
-                          obj.cbpdes_img
-                            ? `
+                        ${obj.cbpdes_img
+          ? `
                             <figure>
                                 <img src="${obj.cbpdes_img}"/>
                             </figure>
                             `
-                            : ``
-                        }
-                        ${
-                          obj.cbpdes
-                            ? `<div class="post-des ${
-                                obj.cbpdes_img
-                                  ? "text-overflow-2"
-                                  : "text-overflow-3"
-                              }">${obj.cbpdes}</div>`
-                            : ``
-                        }
-                        ${
-                          Object.getOwnPropertyNames(obj.footInfo).length > 0
-                            ? `
+          : ``
+        }
+                        ${obj.cbpdes
+          ? `<div class="post-des ${obj.cbpdes_img
+            ? "text-overflow-2"
+            : "text-overflow-3"
+          }">${obj.cbpdes}</div>`
+          : ``
+        }
+                        ${Object.getOwnPropertyNames(obj.footInfo).length > 0
+          ? `
                                 <div class="post-footer">
                                     <div>
-                                        <span class="footer-datetime">${
-                                          obj.footInfo.date
-                                        }</span>
-                                        ${
-                                          obj.footInfo.reads
-                                            ? `<span class="reads"><em>${obj.footInfo.reads}</em>阅</span>`
-                                            : ""
-                                        }
-                                        ${
-                                          obj.footInfo.coments
-                                            ? `<span class="coments"><a href="${obj.link}#comments"><em>${obj.footInfo.coments}</em>评</a></span>`
-                                            : ""
-                                        }
-                                        ${
-                                          obj.footInfo.diggs
-                                            ? `<span class="diggs"><span class="icon-box"></span> <em> ${obj.footInfo.diggs} </em>赞</span>`
-                                            : ""
-                                        }
+                                        <span class="footer-datetime">${obj.footInfo.date
+          }</span>
+                                        ${obj.footInfo.reads
+            ? `<span class="reads"><em>${obj.footInfo.reads}</em>阅</span>`
+            : ""
+          }
+                                        ${obj.footInfo.coments
+            ? `<span class="coments"><a href="${obj.link}#comments"><em>${obj.footInfo.coments}</em>评</a></span>`
+            : ""
+          }
+                                        ${obj.footInfo.diggs
+            ? `<span class="diggs"><span class="icon-box"></span> <em> ${obj.footInfo.diggs} </em>赞</span>`
+            : ""
+          }
                                     </div>
                                     <div>
-                                        ${
-                                          isadmin
-                                            ? `<span class="edits"><a href="${obj.footInfo.editLink}" target="_blink">编辑</a></span>`
-                                            : ``
-                                        }
+                                        ${isadmin
+            ? `<span class="edits"><a href="${obj.footInfo.editLink}" target="_blink">编辑</a></span>`
+            : ``
+          }
                                     </div>
                                 </div>
                             `
-                            : ``
-                        }
+          : ``
+        }
                     </div>
                 </article>
             `;
@@ -698,8 +592,8 @@ function getFollowStatus(blogInfo) {
               statusText.indexOf("加关注") > 0
                 ? false
                 : statusText.indexOf("取消") > 0
-                ? true
-                : false;
+                  ? true
+                  : false;
           }
           resolve(FollowStatus);
           // $this.setState({follows:FollowStatus});
@@ -735,7 +629,7 @@ function tofollows(blogInfo, followState) {
 }
 /***关注 */
 function addfollow(blogInfo, callBack) {
-  callBack = callBack || function () {};
+  callBack = callBack || function () { };
   let $this = this;
   // let {blogInfo}=this.state;
   let { blogUserGuid, isLogin, isadmin } = blogInfo;
@@ -764,7 +658,7 @@ function addfollow(blogInfo, callBack) {
   });
 } /***取消关注 */
 function removeFollow(blogInfo, callBack) {
-  callBack = callBack || function () {};
+  callBack = callBack || function () { };
   let $this = this;
   // let {blogInfo}=this.state;
   let { blogUserGuid } = blogInfo;
@@ -787,7 +681,7 @@ function removeFollow(blogInfo, callBack) {
             );
             return false;
           }
-          message.info("取消关注成功", 3, () => {});
+          message.info("取消关注成功", 3, () => { });
           callBack("取消关注成功");
         },
         error: function (n) {
@@ -796,7 +690,7 @@ function removeFollow(blogInfo, callBack) {
         },
       });
     },
-    onCancel() {},
+    onCancel() { },
   });
 }
 
@@ -912,7 +806,7 @@ function getPhotoList() {
     );
     const photoSrc = $this.find("img").attr("src")
       ? httpsType +
-        removehttp($this.find("img").attr("src").replace("t_", "o_"))
+      removehttp($this.find("img").attr("src").replace("t_", "o_"))
       : $this.find("img").attr("src");
     const photoHref = $this.find("a").attr("href");
     const title = $this.find("a").attr("title") || "";
@@ -941,7 +835,7 @@ function getPages() {
     if (isMobile) {
       let nextpages = $(".topicListFooter").html() || "";
       // let current_pages=`<span class="current_page">${currentPage}</span>`
-      let prepage = '<a href="javascript:void(0)" class="disable">上一页</a>';
+      let prepage = '<a href= class="disable">上一页</a>';
       const mob_pageLists = nextpages;
       return mob_pageLists;
     } else {
@@ -955,10 +849,10 @@ function getPages() {
       let nextPage_href =
         $page_main.find("a:contains('下一页')").attr("href") || "";
       let prePage =
-        prePage_href !== "" ? `<a href="${prePage_href}">上一页</a>` : ""; //'<a href="javascript:void(0)" class="disable">上一页</a>';
+        prePage_href !== "" ? `<a href="${prePage_href}">上一页</a>` : ""; //'<a  class="disable">上一页</a>';
       let current_pages = `<span class="current_page">${currentPage}</span>`;
       let nextpage =
-        nextPage_href !== "" ? `<a href="${nextPage_href}">下一页</a>` : ""; //'<a href="javascript:void(0)" class="disable">下一页</a>';
+        nextPage_href !== "" ? `<a href="${nextPage_href}">下一页</a>` : ""; //'<a  class="disable">下一页</a>';
       const mobile_pageList = prePage + nextpage;
       return mobile_pageList;
     } else {
@@ -968,17 +862,17 @@ function getPages() {
       pageLists =
         currentPage !== ""
           ? pageLists.replace(
-              strP1,
-              `<span class="current_page">${currentPage}</span>$2`
-            )
+            strP1,
+            `<span class="current_page">${currentPage}</span>$2`
+          )
           : pageLists;
       var strP = eval("/(<\\/a>\\s*)(" + currentPage + ")/g");
       pageLists =
         currentPage !== ""
           ? pageLists.replace(
-              strP,
-              `$1<span class="current_page">${currentPage}</span>`
-            )
+            strP,
+            `$1<span class="current_page">${currentPage}</span>`
+          )
           : pageLists;
 
       return pageLists;

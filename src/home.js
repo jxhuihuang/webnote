@@ -55,21 +55,13 @@ export default class Home extends Component {
     $("#page_begin_html").addClass("autohtight");
     let $this = this;
     let { blogInfo, whichpage, postList } = this.state;
-    console.log("postList:", postList);
+
     const { webpages, subPages } = whichpage;
     const { blogTitle, isadmin } = blogInfo;
     switch (webpages) {
       case "index":
         const currentPage = geturl("page") == "" ? 1 : parseInt(geturl("page"));
-        geturl("page") != ""
-          ? $(document).attr(
-              "title",
-              ($(document).attr("title") || "").replace(
-                "随笔列表第" + currentPage + "页 - ",
-                ""
-              )
-            )
-          : ""; //修改标题
+        geturl("page") != "" ? $(document).attr("title", ($(document).attr("title") || "").replace("随笔列表第" + currentPage + "页 - ", "")) : ""; //修改标题
         const pageMain = getPages(); //获取分页
         $(".forFlow").html("").addClass("postlist-main");
         $("#home").show();
@@ -88,8 +80,8 @@ export default class Home extends Component {
             subPages == "articlesList"
               ? "文章分类"
               : subPages == "postList"
-              ? "随笔分类"
-              : "";
+                ? "随笔分类"
+                : "";
           entrylistTitle = $(".forFlow")
             .find(".entrylistTitle")
             .html()
@@ -224,14 +216,12 @@ export default class Home extends Component {
                         <span class="date">
                             ${articleObject.date} 
                         </span>
-                        <span class="postCategorys">${
-                          !isMobile ? "分类:" : ""
-                        }<em><a href="${ctx}/MyDiary.html">我的日志</a></em></span>
-                        ${
-                          blogInfo.isadmin
-                            ? `<span class="edit"><a href="${articleObject.editLink}" target="_blink">编辑</a></span>`
-                            : ``
-                        }
+                        <span class="postCategorys">${!isMobile ? "分类:" : ""
+          }<em><a href="${ctx}/MyDiary.html">我的日志</a></em></span>
+                        ${blogInfo.isadmin
+            ? `<span class="edit"><a href="${articleObject.editLink}" target="_blink">编辑</a></span>`
+            : ``
+          }
                     </div>
                 `);
         $("#blog_post_info, #comment_form").hide();
